@@ -13,11 +13,26 @@ block content
      option(value='Paciente 5') Paciente 5
      option(value='Paciente 6') zPaciente 5
    div(class='form-g roup')
-      a= paciente
+      a= 'paciente'
       input(type="text", name="tipo" value= tipo) 
+   div(class='form-g roup')
+      a= 'Tipo de Vista'
+      input(type="text", name="tipovista" value= tipovista) 
    div(class='form-group')
       a= 'AREA'
       input(type="text", name="area" value= area) 
+   div(class='form-g roup')
+      a= 'Tecnica'
+      input(type="text", name="tecnica" value= tecnica) 
+   div(class='form-g roup')
+      a= 'Procedimineto'
+      input(type="text", name="procedimiento" value= procedimiento) 
+   div(class='form-g roup')
+      a= 'Enfoque'
+      input(type="text", name="enfoque" value= enfoque) 
+   div(class='form-group')
+      a= 'Observaciones'
+      input(type="text", name="observaciones" value= observaciones) 
       input(type="hidden", name="img" value= img) 
    div(class="item")
      if img

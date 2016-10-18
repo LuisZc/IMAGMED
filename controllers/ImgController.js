@@ -14,8 +14,12 @@ module.exports = {
       console.log(req.body.archivo.path);
           res.render('users/savedImg',{
             paciente: req.body.selectpicker1,
-            tipo: req.body.tipo,
+            tipovista: req.body.tipovista,
             area: req.body.area,
+            tecnica: req.body.tecnica,
+            procedimiento: req.body.procedimiento,
+            enfoque: req.body.enfoque,
+            observaciones: req.body.observaciones,
             img: img_orgn
            });
       
@@ -23,8 +27,13 @@ module.exports = {
    },
 	 postEntryImgDb:function(req, res, next){
     var paciente = req.body.selectpicker1;
-    var tipo = req.body.tipo;
+    var vista = req.body.tipovista;
     var area = req.body.area;
+    var tecnica = req.body.tecnica;
+    var procedimiento = req.body.procedimiento;
+    var enfoque= req.body.enfoque;
+    var observaciones = req.body.observaciones;
+    
     
     var session = require('.././database/config');
     var img_original ='public/uploads/upload_'+req.body.img;
@@ -34,7 +43,7 @@ module.exports = {
          var base64Image = original_data.toString('base64');
          console.log(base64Image);
          session
-        .run('CREATE(img:Image {area:{areaParam}, base64:{base64Param}, type:{typeParam}})',{areaParam:area, base64Param:base64Image,typeParam:tipo})
+        .run('CREATE(img:Image {vista:{vistaParam}, area:{areaParam}, base64:{base64Param}, tecnica:{tecnicaParam}, procedimiento:{procedimientoParam}, enfoque:{enfoqueParam}, observaciones:{observacionesParam}})',{vistaParam:vista, areaParam:area, base64Param:base64Image,tecnicaParam:tecnica, procedimientoParam:procedimiento, enfoqueParam:enfoque, observacionesParam:observaciones})
          //   .run('CREATE(img:Image {base64:{base64Param}, type:{typeParam}})',{base64Param: base64Image,typeParam: tipo})
       
          .then(function(result){

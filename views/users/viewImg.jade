@@ -1,0 +1,14 @@
+extends .././templates/default
+
+block content
+ h1= 'Visualización de Imágenes'
+
+  form(method="POST", enctype="multipart/form-data", action="http://localhost:3000/users/views2")
+      select( class="selectpicker" data-style="btn-info" name="selectpickerArea")
+       -each item in areas
+         option #{item.area}
+      
+      input(type="submit" value="Enviar") 
+
+
+ 

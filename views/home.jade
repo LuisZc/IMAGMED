@@ -1,0 +1,36 @@
+﻿extends templates/default
+
+block content
+
+  div(id="myCarousel" class="carousel slide" data-ride="carousel")
+        
+    ol(class="carousel-indicators")
+      li.black(data-target="#myCarousel" data-slide-to="0" class="active")
+      li.black(data-target="#myCarousel" data-slide-to="1")
+      li.black(data-target="#myCarousel" data-slide-to="2")
+    
+    div(class="carousel-inner" role="listbox")
+      div(class="item active" id="principal")
+        img(src="./images/imagen1.jpg" style="display:inline" alt="New York" width="2000" height="900")
+        div(class="carousel-caption")
+          h3.black="New York"
+          p.black="The atmosphere in New York is lorem ipsum."
+        
+
+      div(class="item" id="principal")
+        img(src="./images/imagen2.jpg" style="display:inline" alt="Chicago" width="2000" height="980")
+        div(class="carousel-caption")
+           h3.black="Chicago"
+           p.black="Thank you, Chicago - A night we won't forget."
+       
+    
+      div(class="item" id="principal")
+        img(src="./images/imagen3.jpg" alt="Los Angeles" style="display:inline" width="2000" height="980") 
+        div(class="carousel-caption")
+          h3.black="LA"
+          p.black="Even though the traffic was a mess, we had the best time playing at Venice Beach"
+        
+
+
+
+ 

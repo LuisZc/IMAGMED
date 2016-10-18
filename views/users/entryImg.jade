@@ -1,0 +1,37 @@
+extends .././templates/default
+
+block content
+ h1= 'Imagene Medica'
+ p.right= 'Paciente'
+ div(class='panel-body')
+  
+     
+  div(class='form-group')
+ form(method="POST", enctype="multipart/form-data", action="http://localhost:3000/users/save")
+  div(class='form-group')
+    select( class="selectpicker" data-style="btn-info" name="selectpicker1")
+     option(value='Paciente 1')  Paciente 1
+     option(value='Paciente 2') Paciente 2
+     option(value='Paciente 3') Paciente 3
+     option(value='Paciente 4') Paciente 4
+     option(value='Paciente 5') Paciente 5
+     option(value='Paciente 6') zPaciente 5
+  div(class='form-g roup')
+      a= 'TIPO'
+      input(type="text", name="tipo")
+  div(class='form-group')
+      a= 'AREA'
+      input(type="text", name="area") 
+  div(class='form-group')
+      input(type="file", name="archivo")
+  div(class='form-group')
+      input(type="submit" value="Enviar Datos") 
+  
+ div(class="item")
+     if img
+       img(src="../uploads/upload_"+img alt="Chicago" width="500" height="400")
+     if !img
+       img(src="" alt="" width="500" height="400")
+
+
+   

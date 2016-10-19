@@ -19,6 +19,12 @@ router.post('/auth/signin', passport.authenticate('local', {
       failureFlash : true
 }));
 
+//Rutas Pacientes
+
+router.get('/users/patients', controllers.UserController.getNewPatient);
+
+router.post('/users/patients', controllers.UserController.postNewPatient);
+
 router.get('/auth/logout', controllers.UserController.logout);
 router.get('/users/panel', AuthMiddleware.isLogged ,controllers.UserController.getUserPanel);
 router.get('/users/menu', controllers.ImgController.getEntryImg);

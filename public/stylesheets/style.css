@@ -29,3 +29,17 @@ body.home {
 	height:950px;
 	text-align: center;
 }
+
+
+ 
+.contenedorpie
+  float left
+  width 100%
+  margin 5px 0
+  border-radius 10px
+  background #0d81d5
+  color white
+ 
+.contenedorpie p
+  padding 5px 15px
+  color #dfdfdf

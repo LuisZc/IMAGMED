@@ -2,42 +2,54 @@ extends .././templates/default
 
 block content
 
-
+ 
   form(method="POST", enctype="multipart/form-data", action="http://localhost:3000/users/saved")
-   div(class='form-group')
-    select( class="selectpicker" data-style="btn-info" name="selectpicker1")
-     option(value='Paciente 1')  Paciente 1
-     option(value='Paciente 2') Paciente 2
-     option(value='Paciente 3') Paciente 3
-     option(value='Paciente 4') Paciente 4
-     option(value='Paciente 5') Paciente 5
-     option(value='Paciente 6') zPaciente 5
-   div(class='form-g roup')
-      a= 'paciente'
-      input(type="text", name="tipo" value= tipo) 
-   div(class='form-g roup')
-      a= 'Tipo de Vista'
-      input(type="text", name="tipovista" value= tipovista) 
-   div(class='form-group')
-      a= 'AREA'
-      input(type="text", name="area" value= area) 
-   div(class='form-g roup')
-      a= 'Tecnica'
-      input(type="text", name="tecnica" value= tecnica) 
-   div(class='form-g roup')
-      a= 'Procedimineto'
-      input(type="text", name="procedimiento" value= procedimiento) 
-   div(class='form-g roup')
-      a= 'Enfoque'
-      input(type="text", name="enfoque" value= enfoque) 
-   div(class='form-group')
-      a= 'Observaciones'
-      input(type="text", name="observaciones" value= observaciones) 
-      input(type="hidden", name="img" value= img) 
-   div(class="item")
-     if img
-       img(src="../uploads/upload_"+img alt="Chicago" width="500" height="400")
-     if !img
-       img(src="" alt="" width="500" height="400")
-   div(class='form-group')
-      input(type="submit" value="Enviar Datos")
+   div(class='row')
+      div(class='col-md-1 col-md-offset-1')
+       div(class='form-group')
+         select( class="selectpicker" data-style="btn-info" name="selectpicker1")
+          option(value='Paciente 1') Paciente 1
+          option(value='Paciente 2') Paciente 2
+          option(value='Paciente 3') Paciente 3
+          option(value='Paciente 4') Paciente 4
+          option(value='Paciente 5') Paciente 5
+          option(value='Paciente 6') Paciente 5
+       div(class='form-group')
+         br
+         br
+         label(for='tipo') PACIENTE
+           input(type="text", name="tipo" value= tipo) 
+       div(class='form-group')
+           label(for='tipovista') TIPO DE VISTA
+           input(type="text", name="tipovista" value= tipovista)
+       div(class='form-group')
+           label(for='area') ÁREA
+           input(type="text", name="area" value= area) 
+       div(class='form-g roup')
+           label(for='tecnica') TECNICA
+           input(type="text", name="tecnica" value= tecnica) 
+       div(class='form-g roup')
+           label(for='procedimiento') PROCEDIMIENTO
+           input(type="text", name="procedimiento" value= procedimiento) 
+       div(class='form-g roup')
+           label(for='enfoque') ENFOQUE
+           input(type="text", name="enfoque" value= enfoque)
+      div(class='col-md-3 col-md-offset-3')    
+       div(class='form-group')
+           a= 'Observaciones'
+           input(type="text", name="observaciones" value= observaciones) 
+           input(type="hidden", name="img" value= img) 
+       div(class="item")
+            if img
+              img(src="../uploads/upload_"+img alt="Chicago" width="500" height="400")
+            if !img
+              img(src="" alt="" width="500" height="400")
+       div(class='form-group')
+            input(type="submit" value="Enviar Datos")
+ br
+   p.footer 
+        div(class="contadadorpie")
+          p
+           | Todos los derechos reservados
+           br
+           | UNIVERSIDAD CENTRAL DEL ECUADOR

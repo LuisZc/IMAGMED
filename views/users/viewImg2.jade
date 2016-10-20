@@ -1,6 +1,33 @@
 extends .././templates/default
 
 block content
+ br 
+ br 
+ br
  h1= 'Visualización de Imágenes'
-   a= imgArea
-   img(src="data:image/jpg;base64,"+resultado alt="Chicago" width="500" height="400")
+   br
+   a= imgPaciente
+   br 
+   br
+   -each item in images
+     img(src="data:image/jpg;base64,"+item.img alt="Chicago" width="500" height="400")
+     br
+     p="Responsable :"+item.namedoctor
+     br 
+     p="Vista :"+item.vista
+     br
+     p="Area :"+item.area
+     br
+     p="Tecnica :"+item.tecnica
+     br
+     p="Proceso :"+item.proceso
+     br
+     p="Enfoque :"+item.enfoque
+     br
+     p="Observaciones :"+item.observaciones
+     
+
+      
+      
+      
+     

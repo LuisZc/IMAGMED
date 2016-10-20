@@ -5,8 +5,8 @@ block content
 
   form(method="POST", enctype="multipart/form-data", action="http://localhost:3000/users/views2")
       select( class="selectpicker" data-style="btn-info" name="selectpickerArea")
-       -each item in areas
-         option #{item.area}
+       -each item in names
+         option #{item.name}
       
       input(type="submit" value="Enviar") 
 

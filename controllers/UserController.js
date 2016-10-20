@@ -3,7 +3,33 @@ var bcrypt = require('bcryptjs')
 
 module.exports = {
 	getSignUp : function(req, res, next){
-		return res.render('users/signup');
+		var session = require('.././database/config');
+    session
+    .run('MATCH(dr:Doctor) RETURN dr.name')
+   //.run('MATCH(img:Image) RETURN img LIMIT 25')
+    .then(function(result){
+      var areaNameArr = [];
+     console.log(result);
+      result.records.forEach(function(record){
+         areaNameArr.push({
+            //id: record._fields[0].identity.low,
+            name: record._fields[0]
+          // area:record._fields[0].properties.type
+         });
+      });
+      console.log(areaNameArr);
+      res.render('users/signup',{
+           // isAuthenticated : req.isAuthenticated(),
+          //  user : req.user,
+            names: areaNameArr
+           });
+      session.close();
+
+    })
+    .catch(function(err){
+      console.log(err);
+    });
+		//return res.render('users/signup');
 	},
 	
 	getNewPatient : function(req, res, next){
@@ -40,6 +66,53 @@ module.exports = {
 		   console.log(err);
 	   });   
           //res.redirect('/');
+	},
+	getNewDoctor: function(req, res, next){
+        return res.render('users/doctor');
+	},
+	postNewDoctor: function(req, res, next){
+		var salt = bcrypt.genSaltSync(10);
+		var password = bcrypt.hashSync(req.body.password, salt);
+		var session = require('.././database/config');
+         var name = req.body.nomape;
+         var age =  req.body.edad;
+         var gender =  req.body.genero;
+         var identity_card =  req.body.cedula;
+         var area= req.body.area;
+         var specialty= req.body.especialidad;
+         var email =  req.body.email;
+         session
+         .run('CREATE(dr:Doctor {name:{nameParam}, age:{ageParam}, gender:{genderParam}, identity_card:{identity_cardParam}, area:{areaParam}, specialty:{specialtyParam}})', {nameParam:name, ageParam:age, genderParam:gender, identity_cardParam:identity_card, areaParam:area, specialtyParam:specialty})
+         .then(function(result){
+         	  session
+         	  .run('CREATE(usr:User {username:{usernameParam}, email:{emailParam}, password:{passwordParam}})', {usernameParam:name, emailParam:email, passwordParam:password})
+         	  .then(function(result1){
+                 session
+                 .run('MATCH(dr:Doctor {name:{nameParam}}), (usr:User {username:{nameParam}}) MERGE(usr)-[bgu:belongs_usr]->(dr)', {nameParam:name})
+                 .then(function(result2){
+                       res.redirect('/users/doctors');
+		               session.close();
+                    })
+                 .catch(function(err){
+         	     console.log('Esta dando error2');
+               	console.log(err);
+
+                 });
+         	   })
+         	  .catch(function(err){
+             	console.log('Esta dando error1');
+         	   console.log(err);
+   
+               });
+           
+
+         })
+         .catch(function(err){
+         	console.log('Esta dando error');
+         	console.log(err);
+
+         });
+
 	},
 
 	postSignUp: function(req, res, next){
@@ -85,6 +158,7 @@ module.exports = {
 
 		});
 	 }
+
 
 	 
 }

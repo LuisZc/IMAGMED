@@ -1,22 +1,24 @@
 extends .././templates/default
 
 block content
+  br
+  br
+  br
+  br
+  br
+  br
+  br
   form(method="POST", enctype="multipart/form-data", action="http://localhost:3000/users/saved")
    div(class='row')
       div(class='col-md-1 col-md-offset-1')
+       
        div(class='form-group')
-         select( class="selectpicker" data-style="btn-info" name="selectpicker1")
-          option(value='Paciente 1') Paciente 1
-          option(value='Paciente 2') Paciente 2
-          option(value='Paciente 3') Paciente 3
-          option(value='Paciente 4') Paciente 4
-          option(value='Paciente 5') Paciente 5
-          option(value='Paciente 6') Paciente 5
+        
+           label(for='doctor') DOCTOR
+           input(type="text", name="doctorname" value= user.nombre ) 
        div(class='form-group')
-         br
-         br
-         label(for='tipo') PACIENTE
-           input(type="text", name="tipo" value= tipo) 
+         label(for='paciente') PACIENTE
+           input(type="text", name="paciente" value= paciente ) 
        div(class='form-group')
            label(for='tipovista') TIPO DE VISTA
            input(type="text", name="tipovista" value= tipovista)

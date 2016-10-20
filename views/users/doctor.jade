@@ -1,0 +1,39 @@
+extends ../templates/default
+
+block content
+ br
+ br
+ br
+ br
+ h1 Nuevo Paciente
+ div(class='row')
+  div(class='col-md-6 col-md-offset-3')
+    div(class='panel panel-default')
+     div(class='panel-heading')='Datos Doctor'
+      div(class='panel-body')
+       form(action='http://localhost:3000/users/doctors' method='post' autocomplete='off')
+         div(class='form-group')
+          label(for='nomape')= 'Nombres y Apellidos'
+          input(type='nomape' name='nomape' id='nomape' placeholder='Nombres y Apellidos' class='form-control')
+         div(class='form-group')
+          label(for='edad')= 'Edad'
+          input(type='edad' name='edad' id='edad' placeholder='Edad' class='form-control')
+         div(class='form-group')
+          label(for='genero')= 'Género'
+          input(type='genero' name='genero' id='genero' placeholder='Genero' class='form-control')
+         div(class='form-group')
+          label(for='nacionalidad')= 'Cédula de Identidad'
+          input(type='nacionalidad' name='cedula' id='cedula' placeholder='cedula' class='form-control')
+         div(class='form-group')
+          label(for='estcivil')='Área'
+          input(type='estcivil' name='area' id='area' placeholder='area' class='form-control')
+         div(class='form-group')
+          label(for='ocupacion')='Especialidad'
+          input(type='ocupacion' name='especialidad' id='especialidad' placeholder='especialidad' class='form-control')
+         div(class='form-group')
+          label(for='email')= 'Email'
+          input(type='email' name='email' id='email' placeholder='Email' class='form-control')
+         div(class='form-group')
+          label(for='password')= 'Password'
+          input(type='password' name='password' id='password' placeholder='Password' class='form-control')
+         button(type='submit' class='btn btn-default')= 'Registrar'

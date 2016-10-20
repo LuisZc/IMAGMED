@@ -4,15 +4,41 @@ var fs=require('fs');
 module.exports = {
 	getEntryImg: function(req, res, next){
 
-           res.render('users/entryImg',{
-           	isAuthenticated : req.isAuthenticated(),
-			      user : req.user
+     var session = require('.././database/config');
+    session
+    .run('MATCH(ptn:Patient) RETURN ptn.name')
+    .then(function(result){
+      var namePtnArr = [];
+     //console.log(result);
+      result.records.forEach(function(record){
+         namePtnArr.push({
+            //id: record._fields[0].identity.low,
+            name: record._fields[0]
+          // area:record._fields[0].properties.type
+         });
+      });
+
+      res.render('users/entryImg',{
+            isAuthenticated : req.isAuthenticated(),
+            user : req.user,
+            names: namePtnArr
            });
+      
+         session.close();
+
+    })
+    .catch(function(err){
+      console.log(err);
+    });
+
+           
 	 },
    postEntryImg:function(req, res, next){
       var img_orgn = req.body.archivo.path.split("_").pop(); 
-      console.log(req.body.archivo.path);
+      console.log(req.body.observaciones);
           res.render('users/savedImg',{
+            isAuthenticated : req.isAuthenticated(),
+            user : req.user,
             paciente: req.body.selectpicker1,
             tipovista: req.body.tipovista,
             area: req.body.area,
@@ -26,31 +52,42 @@ module.exports = {
 
    },
 	 postEntryImgDb:function(req, res, next){
-    var paciente = req.body.selectpicker1;
+    var paciente = req.body.paciente;
     var vista = req.body.tipovista;
     var area = req.body.area;
     var tecnica = req.body.tecnica;
     var procedimiento = req.body.procedimiento;
     var enfoque= req.body.enfoque;
     var observaciones = req.body.observaciones;
-    
+    var doctor= req.body.doctorname;
+    console.log(paciente);
+    console.log(doctor);
     
     var session = require('.././database/config');
     var img_original ='public/uploads/upload_'+req.body.img;
-    console.log(img_original);
+    //;console.log(img_original);
    fs.readFile(img_original, function(err, original_data){
          fs.writeFile('image_orig.jpg', original_data, function(err) {});
          var base64Image = original_data.toString('base64');
-         console.log(base64Image);
+         //console.log(base64Image);
          session
         .run('CREATE(img:Image {vista:{vistaParam}, area:{areaParam}, base64:{base64Param}, tecnica:{tecnicaParam}, procedimiento:{procedimientoParam}, enfoque:{enfoqueParam}, observaciones:{observacionesParam}})',{vistaParam:vista, areaParam:area, base64Param:base64Image,tecnicaParam:tecnica, procedimientoParam:procedimiento, enfoqueParam:enfoque, observacionesParam:observaciones})
          //   .run('CREATE(img:Image {base64:{base64Param}, type:{typeParam}})',{base64Param: base64Image,typeParam: tipo})
       
          .then(function(result){
-               fs.unlink(img_original, function(err){
+             session
+             .run('MATCH(ptn:Patient {name:{patientParam}}), (img:Image {base64:{base64Param}}), (dr:Doctor {name:{doctorParam}}) MERGE(dr)-[rsp:responsable]->(img)-[blg:belongs]->(ptn)', {patientParam:paciente, base64Param:base64Image, doctorParam:doctor })
+             .then(function(result1){
+                fs.unlink(img_original, function(err){
                  res.redirect('/users/menu');
                  session.close();
                });
+              })
+             .catch(function(err){
+                console.log("Error 2");
+                console.log(err);
+                });
+             
                
                
          })
@@ -99,23 +136,23 @@ module.exports = {
    getViewImg: function(req, res, next){
     var session = require('.././database/config');
     session
-    .run('MATCH(img:Image) RETURN img.area')
+    .run('MATCH(ptn:Patient) RETURN ptn.name')
    //.run('MATCH(img:Image) RETURN img LIMIT 25')
     .then(function(result){
-      var areaImgArr = [];
+      var namePtnArr = [];
      console.log(result);
       result.records.forEach(function(record){
-         areaImgArr.push({
+         namePtnArr.push({
             //id: record._fields[0].identity.low,
-            area: record._fields[0]
+            name: record._fields[0]
           // area:record._fields[0].properties.type
          });
       });
-      console.log(areaImgArr);
+      console.log(namePtnArr);
       res.render('users/viewImg',{
            // isAuthenticated : req.isAuthenticated(),
           //  user : req.user,
-            areas: areaImgArr
+            names: namePtnArr
            });
       session.close();
 

@@ -25,12 +25,15 @@ router.get('/users/patients', controllers.UserController.getNewPatient);
 
 router.post('/users/patients', controllers.UserController.postNewPatient);
 
+router.get('/users/doctors', controllers.UserController.getNewDoctor);
+router.post('/users/doctors', controllers.UserController.postNewDoctor);
+
 router.get('/auth/logout', controllers.UserController.logout);
 router.get('/users/panel', AuthMiddleware.isLogged ,controllers.UserController.getUserPanel);
-router.get('/users/menu', controllers.ImgController.getEntryImg);
-router.get('/users/views', controllers.ImgController.getViewImg);
-router.post('/users/saved', controllers.ImgController.postEntryImgDb);
-router.post('/users/save', controllers.ImgController.postEntryImg);
+router.get('/users/menu', AuthMiddleware.isLogged,controllers.ImgController.getEntryImg);
+router.get('/users/views',AuthMiddleware.isLogged, controllers.ImgController.getViewImg);
+router.post('/users/saved',AuthMiddleware.isLogged,controllers.ImgController.postEntryImgDb);
+router.post('/users/save',AuthMiddleware.isLogged,controllers.ImgController.postEntryImg);
 router.post('/users/views2', controllers.ImgController.postViewImg);
 
 /* GET home page. */

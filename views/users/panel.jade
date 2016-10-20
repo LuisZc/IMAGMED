@@ -1,6 +1,14 @@
 extends .././templates/default
 
 block content
- h1= 'Pagina de Inicio'
- if isAuthenticated
-  p= 'Bienvenido' +' '+ user.nombre
+ br
+ br
+ br
+ br
+ .panel.panel-default
+      .panel-heading
+        h2.panel-title SISTEMA DE GESTIÓN
+           small  Perfil de Usuario 
+
+     if isAuthenticated
+     p= 'Bienvenido' +' '+ user.nombre

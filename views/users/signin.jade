@@ -12,7 +12,8 @@ block content
    if message.length > 0
    div(class='alert alert-success', role='alert')= message
     div(class='panel panel-default')
-     div(class='panel-heading')='Iniciar Sesion'
+     div(class='panel-heading')
+      h3.panel-title Iniciar Sesión
       div(class='panel-body')
        form(action='http://localhost:3000/auth/signin' method='post')
          div(class='form-group')
@@ -22,4 +23,4 @@ block content
          div(class='form-group')
           label(for='password')= 'Password'
           input(type='password' name='password' id='password' placeholder='Password' class='form-control')
-         button(type='submit' class='btn btn-default')= 'Iniciar Session'
+         button(type='submit' class='btn btn-primary')= 'Iniciar Session'

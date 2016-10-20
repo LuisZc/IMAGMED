@@ -31,19 +31,20 @@ block content
        div(class='form-g roup')
            label(for='procedimiento') PROCEDIMIENTO
            input(type="text", name="procedimiento" value= procedimiento) 
-       div(class='form-g roup')
+       div(class='form-group')
            label(for='enfoque') ENFOQUE
            input(type="text", name="enfoque" value= enfoque)
+       div(class='form-group')
+          label(for='observaciones') OBSERVACIONES
+           input(type="text", name="observaciones" value= observaciones) 
+           input(type="hidden", name="img" value= img)        
       div(class='col-md-3 col-md-offset-3')    
        div(class='form-group')
-           a= 'Observaciones'
-           input(type="text", name="observaciones" value= observaciones) 
-           input(type="hidden", name="img" value= img) 
-       div(class="item")
+         div(class="item")
             if img
               img(src="../uploads/upload_"+img alt="Chicago" width="500" height="400")
             if !img
-              img(src="" alt="" width="500" height="400")
+              img(src="" alt="" width="500" height="400") 
        div(class='form-group')
             input(type="submit" value="Enviar Datos")
  br

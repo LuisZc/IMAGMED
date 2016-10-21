@@ -9,6 +9,10 @@ block content
       .panel-heading
         h2.panel-title SISTEMA DE GESTIÓN
            small  Perfil de Usuario 
+       
 
      if isAuthenticated
      p= 'Bienvenido' +' '+ user.nombre
+
+      div(class='form-group has-success')
+           input(type="submit" value="Enviar Datos" class="btn btn-primary" onClick="location.href = 'menu'" ) 

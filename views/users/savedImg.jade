@@ -12,35 +12,35 @@ block content
    div(class='row')
       div(class='col-md-2 col-md-offset-1')
        
-       div(class='form-group')
+       div(class='form-group has-success')
         
-           label(for='doctor') DOCTOR
+           label(for='doctor') Doctor
            input(type="text", name="doctorname" value= user.nombre class='form-control') 
-       div(class='form-group')
-         label(for='paciente') PACIENTE
+       div(class='form-group has-success')
+         label(for='paciente') Paciente
            input(type="text", name="paciente" value= paciente class='form-control') 
-       div(class='form-group')
-           label(for='tipovista') TIPO DE VISTA
+       div(class='form-group has-success')
+           label(for='tipovista') Tipo de Vista
            input(type="text", name="tipovista" value= tipovista class='form-control')
-       div(class='form-group')
-           label(for='area') ÁREA
+       div(class='form-group has-success')
+           label(for='area') Área
            input(type="text", name="area" value= area class='form-control') 
-       div(class='form-g roup')
-           label(for='tecnica') TECNICA
+       div(class='form-group has-success')
+           label(for='tecnica') Técnica
            input(type="text", name="tecnica" value= tecnica class='form-control') 
-       div(class='form-g roup')
-           label(for='procedimiento') PROCEDIMIENTO
+       div(class='form-group has-success')
+           label(for='procedimiento') Procedimiento
            input(type="text", name="procedimiento" value= procedimiento class='form-control') 
-       div(class='form-group')
-           label(for='enfoque') ENFOQUE
+       div(class='form-group has-success')
+           label(for='enfoque') Enfoque
            input(type="text", name="enfoque" value= enfoque class='form-control')
-       div(class='form-group')
-           label(for='observaciones') OBSERVACIONES
+       div(class='form-group has-success')
+           label(for='observaciones') Observaciones
            input(type="textarea",id='observaciones', name="observaciones" value= enfoque class='form-control')
             
            input(type="hidden", name="img" value= img)        
       div(class='col-md-4 col-md-offset-3')    
-       div(class='form-group')
+       div(class='form-group has-success')
          div(class="item")
             if img
               img(src="../uploads/upload_"+img alt="Chicago" width="500" height="400")

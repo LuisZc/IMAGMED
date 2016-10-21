@@ -13,12 +13,12 @@ block content
   div(class='col-md-6 col-md-offset-3')
     div(class='panel panel-default')
      div(class='panel-heading')
-       h3.panel-title Ingresar datos Paciente
+       h3.panel-title Ingresar datos Doctor
       div(class='panel-body')
        form(action='http://localhost:3000/users/doctors' method='post' autocomplete='off')
          div(class='form-group has-success')
           label(for='nomape')= 'Nombres y Apellidos'
-          input(type='nomape' name='nomape' id='nomape' placeholder='Nombres y Apellidos' class='form-control' style='text-transform:uppercase')
+          input(type='nomape' name='nomape' id='nomape' placeholder='Nombres y Apellidos' class='form-control' style='text-transform:uppercase' title='Ingresar Nombres y Apellidos completos')
          div(class='form-group has-success')
           label(for='edad')= 'Edad'
           input(type='edad' name='edad' id='edad' placeholder='Edad' class='form-control' style='text-transform:uppercase')

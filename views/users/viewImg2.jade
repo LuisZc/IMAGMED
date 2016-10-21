@@ -1,31 +1,45 @@
 extends .././templates/default
 
 block content
- br 
- br 
- br
- h1= 'Visualización de Imágenes'
-   br
-   a= imgPaciente
-   br 
-   br
-   -each item in images
-     img(src="data:image/jpg;base64,"+item.img alt="Chicago" width="500" height="400")
-     br
-     p="Responsable :"+item.namedoctor
-     br 
-     p="Vista :"+item.vista
-     br
-     p="Area :"+item.area
-     br
-     p="Tecnica :"+item.tecnica
-     br
-     p="Proceso :"+item.proceso
-     br
-     p="Enfoque :"+item.enfoque
-     br
-     p="Observaciones :"+item.observaciones
-     
+  br
+  br
+  br
+  .panel.panel-default
+   .panel-heading
+     h2.panel-title Sistema de Gestión 
+        small Imagenes realizadas al paciente
+  br
+  div(class='row')
+   div(class='container-fluid')
+    
+    div(class='col-md-5 col-md-offset-4')
+     div(class='panel panel-default')
+      div(class='panel-heading')
+        h3.panel-title Registro de Imagenes del Paciente
+       div(class='panel-body')
+        div(class='form-group')
+         label(for='imgPaciente')='Paciente:' +' '+ imgPaciente
+        div(class='form-group')     
+        
+          -each item in images
+           img(src="data:image/jpg;base64,"+item.img alt="Chicago" width="500" height="400")
+           
+           div(class='form-group')
+           label(for='namedoctor')= 'Responsable:' + item.namedoctor
+           div(class='form-group') 
+           p="Vista :"+item.vista
+           div(class='form-group')
+           p="Área :"+item.area
+           div(class='form-group')
+           p="Técnica :"+item.tecnica
+           div(class='form-group')
+           p="Proceso :"+item.proceso
+           div(class='form-group')
+           p="Enfoque :"+item.enfoque
+           div(class='form-group')
+           p="Observaciones :"+item.observaciones
+       
+            
 
       
       

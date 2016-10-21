@@ -10,35 +10,36 @@ block content
   br
   form(method="POST", enctype="multipart/form-data", action="http://localhost:3000/users/saved")
    div(class='row')
-      div(class='col-md-1 col-md-offset-1')
+      div(class='col-md-2 col-md-offset-1')
        
        div(class='form-group')
         
            label(for='doctor') DOCTOR
-           input(type="text", name="doctorname" value= user.nombre ) 
+           input(type="text", name="doctorname" value= user.nombre class='form-control') 
        div(class='form-group')
          label(for='paciente') PACIENTE
-           input(type="text", name="paciente" value= paciente ) 
+           input(type="text", name="paciente" value= paciente class='form-control') 
        div(class='form-group')
            label(for='tipovista') TIPO DE VISTA
-           input(type="text", name="tipovista" value= tipovista)
+           input(type="text", name="tipovista" value= tipovista class='form-control')
        div(class='form-group')
            label(for='area') ÁREA
-           input(type="text", name="area" value= area) 
+           input(type="text", name="area" value= area class='form-control') 
        div(class='form-g roup')
            label(for='tecnica') TECNICA
-           input(type="text", name="tecnica" value= tecnica) 
+           input(type="text", name="tecnica" value= tecnica class='form-control') 
        div(class='form-g roup')
            label(for='procedimiento') PROCEDIMIENTO
-           input(type="text", name="procedimiento" value= procedimiento) 
+           input(type="text", name="procedimiento" value= procedimiento class='form-control') 
        div(class='form-group')
            label(for='enfoque') ENFOQUE
-           input(type="text", name="enfoque" value= enfoque)
+           input(type="text", name="enfoque" value= enfoque class='form-control')
        div(class='form-group')
-          label(for='observaciones') OBSERVACIONES
-           input(type="text", name="observaciones" value= observaciones) 
+           label(for='observaciones') OBSERVACIONES
+           input(type="textarea",id='observaciones', name="observaciones" value= enfoque class='form-control')
+            
            input(type="hidden", name="img" value= img)        
-      div(class='col-md-3 col-md-offset-3')    
+      div(class='col-md-4 col-md-offset-3')    
        div(class='form-group')
          div(class="item")
             if img
@@ -46,7 +47,7 @@ block content
             if !img
               img(src="" alt="" width="500" height="400") 
        div(class='form-group')
-            input(type="submit" value="Enviar Datos")
+            input(type="submit" value="Guardar" class="btn btn-primary")
  br
    p.footer 
         div(class="contadadorpie")

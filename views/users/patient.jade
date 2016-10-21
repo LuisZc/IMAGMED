@@ -12,35 +12,35 @@ block content
   div(class='row')
   div(class='col-md-6 col-md-offset-3')
     div(class='panel panel-default')
-     div(class='panel-heading')
-       h3.panel-title Datos Paciente
+     div(class='panel-heading ')
+       h3.panel-title Ingresar datos Paciente
       div(class='panel-body')
        form(action='http://localhost:3000/users/patients' method='post' autocomplete='off')
-         div(class='form-group')
+         div(class='form-group has-success')
           label(for='nomape')= 'Nombres y Apellidos'
           input(type='nomape' name='nomape' id='nomape' placeholder='Nombres y Apellidos' class='form-control' style='text-transform:uppercase')
-         div(class='form-group')
+         div(class='form-group has-success')
           label(for='edad')= 'Edad'
           input(type='edad' name='edad' id='edad' placeholder='Edad' class='form-control' style='text-transform:uppercase')
-         div(class='form-group')
+         div(class='form-group has-success')
           label(for='genero')= 'Género'
           input(type='genero' name='genero' id='genero' placeholder='Genero' class='form-control' style='text-transform:uppercase')
-         div(class='form-group')
+         div(class='form-group has-success')
           label(for='nacionalidad')= 'Nacionalidad'
           input(type='nacionalidad' name='nacionalidad' id='nacionalidad' placeholder='Nacionalidad' class='form-control' style='text-transform:uppercase')
-         div(class='form-group')
+         div(class='form-group has-success')
           label(for='estcivil')='Estado Civil'
           input(type='estcivil' name='estcivil' id='estcivil' placeholder='Estado Civil' class='form-control' style='text-transform:uppercase')
-         div(class='form-group')
+         div(class='form-group has-success')
           label(for='ocupacion')='Ocupación'
           input(type='ocupacion' name='ocupacion' id='ocupacion' placeholder='Ocupación' class='form-control' style='text-transform:uppercase')
-         div(class='form-group')
+         div(class='form-group has-success')
           label(for='lugorigen')='Lugar de Origen'
           input(type='lugorigen' name='lugorigen' id='lugorigen' placeholder='Lugar de Origen' class='form-control' style='text-transform:uppercase')
-         div(class='form-group')
+         div(class='form-group has-success')
           label(for='lugres')='Lugar de Residencia'
           input(type='lugres' name='lugres' id='lugres' placeholder='Lugar de Residencia' class='form-control' style='text-transform:uppercase')
-         div(class='form-group')
+         div(class='form-group has-success')
           label(for='telefono')='Teléfono'
           input(type='telefono' name='telefono' id='telefono' placeholder='Teléfono' class='form-control' style='text-transform:uppercase')     
          button(type='submit' class='btn btn-primary')= 'Registrar' 

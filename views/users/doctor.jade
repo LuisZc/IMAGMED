@@ -5,35 +5,39 @@ block content
  br
  br
  br
- h1 Nuevo Paciente
+ .panel.panel-default
+      .panel-heading
+        h2.panel-title SISTEMA DE GESTIÓN
+           small   Nuevo Doctor
  div(class='row')
   div(class='col-md-6 col-md-offset-3')
     div(class='panel panel-default')
-     div(class='panel-heading')='Datos Doctor'
+     div(class='panel-heading')
+       h3.panel-title Ingresar datos Paciente
       div(class='panel-body')
        form(action='http://localhost:3000/users/doctors' method='post' autocomplete='off')
-         div(class='form-group')
+         div(class='form-group has-success')
           label(for='nomape')= 'Nombres y Apellidos'
-          input(type='nomape' name='nomape' id='nomape' placeholder='Nombres y Apellidos' class='form-control')
-         div(class='form-group')
+          input(type='nomape' name='nomape' id='nomape' placeholder='Nombres y Apellidos' class='form-control' style='text-transform:uppercase')
+         div(class='form-group has-success')
           label(for='edad')= 'Edad'
-          input(type='edad' name='edad' id='edad' placeholder='Edad' class='form-control')
-         div(class='form-group')
+          input(type='edad' name='edad' id='edad' placeholder='Edad' class='form-control' style='text-transform:uppercase')
+         div(class='form-group has-success')
           label(for='genero')= 'Género'
-          input(type='genero' name='genero' id='genero' placeholder='Genero' class='form-control')
-         div(class='form-group')
+          input(type='genero' name='genero' id='genero' placeholder='Género' class='form-control' style='text-transform:uppercase')
+         div(class='form-group has-success')
           label(for='nacionalidad')= 'Cédula de Identidad'
-          input(type='nacionalidad' name='cedula' id='cedula' placeholder='cedula' class='form-control')
-         div(class='form-group')
+          input(type='nacionalidad' name='cedula' id='cedula' placeholder='cédula' class='form-control' style='text-transform:uppercase')
+         div(class='form-group has-success')
           label(for='estcivil')='Área'
-          input(type='estcivil' name='area' id='area' placeholder='area' class='form-control')
-         div(class='form-group')
+          input(type='estcivil' name='area' id='area' placeholder='área' class='form-control' style='text-transform:uppercase')
+         div(class='form-group has-success')
           label(for='ocupacion')='Especialidad'
-          input(type='ocupacion' name='especialidad' id='especialidad' placeholder='especialidad' class='form-control')
-         div(class='form-group')
+          input(type='ocupacion' name='especialidad' id='especialidad' placeholder='especialidad' class='form-control' style='text-transform:uppercase')
+         div(class='form-group has-success')
           label(for='email')= 'Email'
           input(type='email' name='email' id='email' placeholder='Email' class='form-control')
-         div(class='form-group')
+         div(class='form-group has-success')
           label(for='password')= 'Password'
           input(type='password' name='password' id='password' placeholder='Password' class='form-control')
-         button(type='submit' class='btn btn-default')= 'Registrar'
+         button(type='submit' class='btn btn-primary')= 'Registrar'

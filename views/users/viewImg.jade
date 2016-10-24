@@ -14,7 +14,7 @@ block content
      div(class='col-md-2 col-md-offset-1') 
       div(class='form-group')
        label(for="selectpickerPaciente") Busqueda por Paciente 
-       select(class="selectpicker show-tick" name="selectpickerPaciente" multiple title='Escoger Paciente')
+       select(class="selectpicker show-tick" data-width="auto" name="selectpickerPaciente" title='Escoger Paciente')
         -each item in names
 
          option #{item.name}

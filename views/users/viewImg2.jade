@@ -10,34 +10,38 @@ block content
         small Imagenes realizadas al paciente
   br
   div(class='row')
-   div(class='container-fluid')
+   
     
-    div(class='col-md-5 col-md-offset-4')
+    div(class='col-md-6 col-xs-10')
      div(class='panel panel-default')
       div(class='panel-heading')
         h3.panel-title Registro de Imagenes del Paciente
        div(class='panel-body')
         div(class='form-group')
          label(for='imgPaciente')='Paciente:' +' '+ imgPaciente
-        div(class='form-group')     
-        
+        div(class='form-group has-success')     
           -each item in images
-           img(src="data:image/jpg;base64,"+item.img alt="Chicago" width="500" height="400")
-           
-           div(class='form-group')
-           label(for='namedoctor')= 'Responsable:' + item.namedoctor
-           div(class='form-group') 
-           p="Vista :"+item.vista
-           div(class='form-group')
-           p="Área :"+item.area
-           div(class='form-group')
-           p="Técnica :"+item.tecnica
-           div(class='form-group')
-           p="Proceso :"+item.proceso
-           div(class='form-group')
-           p="Enfoque :"+item.enfoque
-           div(class='form-group')
-           p="Observaciones :"+item.observaciones
+           div(class='form-group has-success' style='float:left;')
+            img(src="data:image/jpg;base64,"+item.img alt="Chicago" width="500" height="400")
+            br
+            br
+           .enlacesfavoritos 
+            br
+            br
+            div(class='form-group')
+            label(for='namedoctor')= ' Responsable:' + item.namedoctor
+            div(class='form-group') 
+            p=" Vista :"+item.vista
+            div(class='form-group')
+            p=" Área :"+item.area
+            div(class='form-group')
+            p=" Técnica :"+item.tecnica
+            div(class='form-group')
+            p=" Proceso :"+item.proceso
+            div(class='form-group')
+            p=" Enfoque :"+item.enfoque
+            div(class='form-group')
+            p=" Observaciones :"+item.observaciones
        
             
 

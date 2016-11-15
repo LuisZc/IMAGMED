@@ -1,0 +1,23 @@
+extends .././templates/default
+
+block content
+  br
+  br
+  br
+  .panel.panel-default
+   .panel-heading
+     h2.panel-title Sistema de Gestión 
+        small Visualización de Imágenes
+ 
+  form(method="POST", enctype="multipart/form-data", action="http://localhost:3000/users/viewprocess2")
+    div(class="row")
+     div(class='col-md-2 col-md-offset-1') 
+      div(class='form-group')
+       label(for="selectpickerProcess") Busqueda por Proceso
+       select(class="selectpicker show-tick" data-width="auto" name="selectpickerProcess" title='Escoger Proceso')
+        -each item in process
+
+         option #{item.pross}
+     div(class='col-md-4 col-md-offset-3') 
+      div(class='form-group')    
+      input(type="submit" value="Buscar" class='btn btn-primary') 

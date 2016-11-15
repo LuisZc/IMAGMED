@@ -36,6 +36,12 @@ router.post('/users/saved',AuthMiddleware.isLogged,controllers.ImgController.pos
 router.post('/users/save',AuthMiddleware.isLogged,controllers.ImgController.postEntryImg);
 router.post('/users/views2', controllers.ImgController.postViewImg);
 
+router.get('/users/viewarea',AuthMiddleware.isLogged, controllers.ImgController.getViewImgArea);
+router.post('/users/viewarea2', controllers.ImgController.postViewImgArea);
+router.get('/users/viewtechnique',AuthMiddleware.isLogged, controllers.ImgController.getViewImgTechnique);
+router.post('/users/viewtechnique2', controllers.ImgController.postViewImgTechnique);
+router.get('/users/viewprocess',AuthMiddleware.isLogged, controllers.ImgController.getViewImgProcess);
+router.post('/users/viewprocess2', controllers.ImgController.postViewImgProcess);
 /* GET home page. */
 /* router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });

@@ -1,0 +1,44 @@
+extends .././templates/default
+
+block content
+  br
+  br
+  br
+  .panel.panel-default
+   .panel-heading
+     h2.panel-title Sistema de Gestión 
+        small Imagenes realizadas al paciente
+  br
+  div(class='row')
+   
+    
+    div(class='col-md-6 col-xs-10')
+     div(class='panel panel-default')
+      div(class='panel-heading')
+        h3.panel-title Registro de Imagenes por Tecnica
+       div(class='panel-body')
+        div(class='form-group')
+         label(for='imgPaciente')='Tecnica:' +' '+ imgTechnique
+        div(class='form-group has-success')     
+          -each item in images
+           div(class='form-group has-success' style='float:left;')
+            img(src="data:image/jpg;base64,"+item.img alt="Chicago" width="500" height="400")
+            br
+            br
+           .enlacesfavoritos 
+            br
+            br
+            div(class='form-group')
+            label(for='namedoctor')= ' Responsable:' + item.namedoctor
+            div(class='form-group')
+            label(for='namedoctor')= ' Paciente:' + item.namedoctor
+            div(class='form-group') 
+            p=" Vista :"+item.vista
+            div(class='form-group')
+            p=" Area :"+item.area
+            div(class='form-group')
+            p=" Proceso :"+item.proceso
+            div(class='form-group')
+            p=" Enfoque :"+item.enfoque
+            div(class='form-group')
+            p=" Observaciones :"+item.observaciones

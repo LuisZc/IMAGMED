@@ -140,7 +140,7 @@ module.exports = {
    //.run('MATCH(img:Image) RETURN img LIMIT 25')
     .then(function(result){
       var namePtnArr = [];
-     console.log(result);
+    // console.log(result);
       result.records.forEach(function(record){
          namePtnArr.push({
             //id: record._fields[0].identity.low,
@@ -200,6 +200,171 @@ module.exports = {
       console.log(err);
     });
     
+   },
+   
+   getViewImgArea: function(req, res, next){
+    var session= require('.././database/config');
+    session
+    .run('MATCH(img:Image) RETURN DISTINCT img.area')
+    .then(function(result){
+      var areaImgArr =[];
+      result.records.forEach(function(record){
+        areaImgArr.push({
+          area: record._fields[0]
+        });
+      });
+
+      res.render('users/viewImgArea',{
+               areas:areaImgArr
+      });
+     session.close();
+    })
+    .catch(function(err){
+      console.log(err);
+    });
+   },
+   postViewImgArea: function(req, res, next){
+    var area = req.body.selectpickerArea;
+    console.log(area);
+    var session = require('.././database/config');
+    session
+    .run('MATCH(dr:Doctor)-[rsp:responsable]-> (img:Image)-[blg:belongs]-> (ptn:Patient)WHERE img.area={areaParam} RETURN img, ptn, dr',{areaParam: area})
+    .then(function(result){
+      var imgArr = [];
+        result.records.forEach(function(record){
+         imgArr.push({
+         id: record._fields[0].identity.low,
+          vista: record._fields[0].properties.view,
+          area: record._fields[0].properties.area,
+          img: record._fields[0].properties.base64,
+          tecnica: record._fields[0].properties.technique,
+          proceso: record._fields[0].properties.process,
+          enfoque: record._fields[0].properties.focus,
+          observaciones: record._fields[0].properties.observations,
+          name: record._fields[1].properties.name,
+          genero: record._fields[1].properties.gender,
+          namedoctor: record._fields[2].properties.name
+           
+         });
+        });
+         res.render('users/viewImgArea2',{
+        imgArea: area, 
+        images: imgArr
+        });
+    })
+    .catch(function(err){
+      console.log(err);
+    });
+   },
+   getViewImgTechnique: function(req, res, next){
+    var session = require('.././database/config');
+    session
+    .run('MATCH(img:Image) RETURN DISTINCT img.technique')
+    .then(function(result){
+      var techImgArr =[];
+      result.records.forEach(function(record){
+        techImgArr.push({
+          tech: record._fields[0]
+        });
+      });
+
+      res.render('users/viewImgTechnique',{
+               techs:techImgArr
+      });
+     session.close();
+    })
+    .catch(function(err){
+      console.log(err);
+    });
+
+   },
+  postViewImgTechnique: function(req, res, next){
+    var technique = req.body.selectpickerTechnique;
+    
+    var session = require('.././database/config');
+    session
+    .run('MATCH(dr:Doctor)-[rsp:responsable]-> (img:Image)-[blg:belongs]-> (ptn:Patient)WHERE img.technique={techniqueParam} RETURN img, ptn, dr',{techniqueParam: technique})
+    .then(function(result){
+      var imgArr = [];
+        result.records.forEach(function(record){
+         imgArr.push({
+         id: record._fields[0].identity.low,
+          vista: record._fields[0].properties.view,
+          area: record._fields[0].properties.area,
+          img: record._fields[0].properties.base64,
+          tecnica: record._fields[0].properties.technique,
+          proceso: record._fields[0].properties.process,
+          enfoque: record._fields[0].properties.focus,
+          observaciones: record._fields[0].properties.observations,
+          name: record._fields[1].properties.name,
+          genero: record._fields[1].properties.gender,
+          namedoctor: record._fields[2].properties.name
+           
+         });
+        });
+         res.render('users/viewImgTechnique2',{
+        imgTechnique: technique, 
+        images: imgArr
+        });
+    })
+    .catch(function(err){
+      console.log(err);
+    });
+   },
+   getViewImgProcess: function(req, res, next){
+    var session = require('.././database/config');
+    session
+    .run('MATCH(img:Image) RETURN DISTINCT img.process')
+    .then(function(result){
+      var prossImgArr =[];
+      result.records.forEach(function(record){
+        prossImgArr.push({
+          pross: record._fields[0]
+        });
+      });
+
+      res.render('users/viewImgProcess',{
+               process:prossImgArr
+      });
+     session.close();
+    })
+    .catch(function(err){
+      console.log(err);
+    });
+
+   }, 
+   postViewImgProcess :function(req, res, next){
+    var procss = req.body.selectpickerProcess;
+    
+    var session = require('.././database/config');
+    session
+    .run('MATCH(dr:Doctor)-[rsp:responsable]-> (img:Image)-[blg:belongs]-> (ptn:Patient)WHERE img.process={processParam} RETURN img, ptn, dr',{processParam: procss})
+    .then(function(result){
+      var imgArr = [];
+        result.records.forEach(function(record){
+         imgArr.push({
+         id: record._fields[0].identity.low,
+          vista: record._fields[0].properties.view,
+          area: record._fields[0].properties.area,
+          img: record._fields[0].properties.base64,
+          tecnica: record._fields[0].properties.technique,
+          proceso: record._fields[0].properties.process,
+          enfoque: record._fields[0].properties.focus,
+          observaciones: record._fields[0].properties.observations,
+          name: record._fields[1].properties.name,
+          genero: record._fields[1].properties.gender,
+          namedoctor: record._fields[2].properties.name
+           
+         });
+        });
+         res.render('users/viewImgProcess2',{
+        imgProcess: procss, 
+        images: imgArr
+        });
+    })
+    .catch(function(err){
+      console.log(err);
+    });
    }
 
 }

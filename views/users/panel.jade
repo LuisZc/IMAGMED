@@ -10,9 +10,83 @@ block content
         h2.panel-title SISTEMA DE GESTIÓN
            small  Perfil de Usuario 
        
-
+  
      if isAuthenticated
-     p= 'Bienvenido' +' '+ user.nombre
+       
+   font(size='5')  
 
-      div(class='form-group has-success')
-           input(type="submit" value="Enviar Datos" class="btn btn-primary" onClick="location.href = 'menu'" ) 
+     p= 'Bienvenido' +' '+ user.nombre
+  div(class='row')        
+    div(class='col-md-3')
+     div(class='panel panel-default')
+      div(class='panel-heading')
+        h3.panel-title Nuevos Ingresos
+       div(class='panel-body')
+        div(class='form-group has-success')
+         font(size='3')
+           p
+            |Ingresar Imagenes: 
+            a(href='menu') Nueva Imagen
+         font(size='3')
+           p
+            |Ingresar Doctor: 
+            a(href='doctors') Nuevo Doctor
+         font(size='3')
+           p
+            |Ingresar Paciente: 
+            a(href='patients') Nuevo Paciente      
+    div(class='col-md-6')
+     img(src='/images/imagmed.png' width="700" height="400")       
+    div(class='col-md-3') 
+      div(class='panel panel-default')
+       div(class='panel-heading')
+         h3.panel-title Nueva Busqueda 
+        div(class='panel-body')
+         div(class='form-group has-success')
+          font(size='3')
+            p
+             |Imagenes: 
+             a(href='views') Por paciente
+          font(size='3')
+            p
+             |Imagenes: 
+             a(href='viewarea') Por Área
+          font(size='3')
+            p
+             |Imagenes: 
+             a(href='viewprocess') Por Procedimiento
+          font(size='3')
+            p
+             |Imagenes: 
+             a(href='viewtechnique') Por Técnica	 
+ .container
+
+    hr        
+    .col-md-4
+    
+       p
+           | UNIVERSIDAD CENTRAL DEL ECUADOR
+           br
+           | Todos los derechos reservados
+           br
+           img(src='/images/imagmedpequeño.png' width="160" height="60")
+    .col-md-4
+     .text-center.center-block
+       h2.txt-railway Síguenos
+       br
+       a(href='https://www.facebook.com/bootsnipp')
+         i#social-fb.fa.fa-facebook-square.fa-3x.social 
+       a(href='https://twitter.com/bootsnipp')
+         i#social-tw.fa.fa-twitter-square.fa-3x.social 
+       a(href='https://plus.google.com/+Bootsnipp-page')
+         i#social-gp.fa.fa-google-plus-square.fa-3x.social 
+       a(href='mailto:bootsnipp@gmail.com')
+         i#social-em.fa.fa-envelope-square.fa-3x.social 
+    .col-md-4
+
+        h3 Contacto:
+        p Dirección: Av.Universitaria.
+        p Telefono: 3453-529  
+        p Correo: lapadilla@rutatec.com    
+
+      

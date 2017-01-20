@@ -7,7 +7,7 @@ block content
   .panel.panel-default
    .panel-heading
      h2.panel-title Sistema de Gestión 
-        small Imagenes realizadas al paciente
+        
   br
   div(class='row')
    
@@ -15,40 +15,55 @@ block content
     div(class='col-md-6 col-xs-10')
      div(class='panel panel-default')
       div(class='panel-heading')
-        h3.panel-title Registro de Imagenes por Area
+        h3.panel-title Ingreso de Observación
        div(class='panel-body')
         div(class='form-group')
-         label(for='imgPaciente')='Area:' +' '+ imgArea
+         
         div(class='form-group has-success')     
-          -each item in images
+          
            div(class='form-group has-success' style='float:left;')
-            img(src="data:image/jpg;base64,"+item.img alt="Chicago" width="500" height="400")
+            img(src="data:image/jpg;base64,"+img  width="500" height="400")
             br
             br
            .enlacesfavoritos 
             br
             br
             div(class='form-group')
-            label(for='namedoctor')= ' Responsable:' + item.namedoctor
+            label(for='namedoctor')= ' Responsable:' + namedoctor
             div(class='form-group')
-            label(for='namepaciente')= ' Paciente:' + item.name
+            label(for='namepaciente')= ' Paciente:' + namepaciente
             div(class='form-group') 
-            p=" Vista :"+item.vista
+            p=" Vista :"+ vista
             div(class='form-group')
-            p=" Técnica :"+item.tecnica
+            p=" Técnica :"+ tecnica
             div(class='form-group')
-            p=" Proceso :"+item.proceso
+            p=" Proceso :"+proceso
             div(class='form-group')
-            p=" Enfoque :"+item.enfoque
+            p=" Enfoque :"+enfoque
+            div(class='form-group')
+            label(for='Obsercaciones')= 'Observaciones :'
             -each itmobs in obsv
-             if itmobs.id.toString() == item.id.toString()
-              div(class='form-group')
+              
+               div(class='form-group')
                p=" Médico Encargado :"+itmobs.responsable
                div(class='form-group')
                p=" Fecha :"+itmobs.dateobs
                div(class='form-group')
                p=" Observacion :"+itmobs.observacion
                br
+        div(class='form-group has-success') 
+        form(method="POST", enctype="multipart/form-data", action="http://localhost:3000/users/svimgobs")
+          div(class='form-group')
+            label(for='Observación')= ' Fecha :' + fecha
+             input(type="hidden" name="img" id="img"  value="#{img}")
+             input(type="hidden" name="nameDoctor" id="nameDoctor"  value="#{namedoctor}" readonly="readonly")
+             input(type="hidden" name="namePaciente" id="namePaciente"  value="#{namepaciente}")
+             input(type="hidden" name="fechaImg" id="fechaImg"  value="#{dateimg}")
+             textarea(cols="40", rows="10", name="observation", id="observation")
+          div(class='form-group')    
+              input(type="submit" value="GUARDAR" class='btn btn-primary') 
+               
+            
   .container
 
     hr        

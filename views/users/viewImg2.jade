@@ -21,27 +21,53 @@ block content
          label(for='imgPaciente')='Paciente:' +' '+ imgPaciente
         div(class='form-group has-success')     
           -each item in images
-           div(class='form-group has-success' style='float:left;')
-            img(src="data:image/jpg;base64,"+item.img alt="Chicago" width="500" height="400")
-            br
-            br
-           .enlacesfavoritos 
-            br
-            br
-            div(class='form-group')
-            label(for='namedoctor')= ' Responsable:' + item.namedoctor
-            div(class='form-group') 
-            p=" Vista :"+item.vista
-            div(class='form-group')
-            p=" Área :"+item.area
-            div(class='form-group')
-            p=" Técnica :"+item.tecnica
-            div(class='form-group')
-            p=" Proceso :"+item.proceso
-            div(class='form-group')
-            p=" Enfoque :"+item.enfoque
-            div(class='form-group')
-            p=" Observaciones :"+item.observaciones
+           form(method="POST", enctype="multipart/form-data", action="http://localhost:3000/users/imgobs")
+            div(class='form-group has-success' style='float:left;')
+             div(class='form-group')
+             label(for='dateImg')= ' Fecha de la Imagen:' + item.dateimg
+             input(type="hidden" name="img" id="img"  value="#{item.img}")
+             input(type="hidden" name="nameDoctor" id="nameDoctor"  value="#{item.namedoctor}" readonly="readonly")
+             input(type="hidden" name="namePaciente" id="namePaciente"  value="#{imgPaciente}")
+             input(type="hidden" name="fechaImg" id="fechaImg"  value="#{item.dateimg}")
+             input(type="hidden" name="vista" id="vista"  value="#{item.vista}")
+             input(type="hidden" name="area" id="area"  value="#{item.area}")
+             input(type="hidden" name="tecnica" id="tecnica"  value="#{item.tecnica}")
+             input(type="hidden" name="proceso" id="proceso"  value="#{item.proceso}")
+             input(type="hidden" name="enfoque" id="enfoque"  value="#{item.enfoque}")
+
+             br
+             br
+             img(src="data:image/jpg;base64,"+item.img alt="Chicago" width="500" height="400")
+             br
+             br
+            .enlacesfavoritos 
+             br
+             br
+             div(class='form-group')
+             label(for='namedoctor')= ' Responsable:' + item.namedoctor
+             div(class='form-group') 
+             p=" Vista :"+item.vista
+             div(class='form-group')
+             p=" Área :"+item.area
+             div(class='form-group')
+             p=" Técnica :"+item.tecnica
+             div(class='form-group')
+             p=" Proceso :"+item.proceso
+             div(class='form-group')
+             p=" Enfoque :"+item.enfoque
+             div(class='form-group')
+             label(for='Obsercaciones')= 'Observaciones :'
+             -each itmobs in obsv
+              if itmobs.id.toString() == item.id.toString()
+               div(class='form-group')
+               p=" Médico Encargado :"+itmobs.responsable
+               div(class='form-group')
+               p=" Fecha :"+itmobs.dateobs
+               div(class='form-group')
+               p=" Observacion :"+itmobs.observacion
+               br
+             div(class='form-group')    
+              input(type="submit" value="AÑADIR OBSERVACIÓN" class='btn btn-primary') 
   .container
 
     hr        

@@ -8,40 +8,48 @@ block content
  .panel.panel-default
       .panel-heading
         h2.panel-title SISTEMA DE GESTIÓN
-           small   Nuevo Doctor
+        h2
+           small   Perfil 
  div(class='row')
   div(class='col-md-6 col-md-offset-3')
     div(class='panel panel-default')
      div(class='panel-heading')
-       h3.panel-title Ingresar datos Doctor
+       h3.panel-title Datos 
       div(class='panel-body')
-       form(action='http://localhost:3000/users/doctors' method='post' autocomplete='off')
+      -each prf in perfil
+       
+         div(class='')
+          label(for='perfil')= prf.perfil
          div(class='form-group has-success')
           label(for='nomape')= 'Nombres y Apellidos'
-          input(type='nomape' name='nomape' id='nomape' placeholder='Nombres y Apellidos' class='form-control' style='text-transform:uppercase' title='Ingresar Nombres y Apellidos completos')
+         div(class='form-group has-success')
+          label(for='nombre')= prf.nombre
          div(class='form-group has-success')
           label(for='birthdate')= 'Fecha de Nacimiento'
-          input(type='birthdate' name='birthdate' id='birthdate' placeholder='día/mes/año' class='form-control' style='text-transform:uppercase')
+         div(class='form-group has-success')
+          label(for='birthdate')= prf.fechana
          div(class='form-group has-success')
           label(for='genero')= 'Género'
-          input(type='genero' name='genero' id='genero' placeholder='Género' class='form-control' style='text-transform:uppercase')
+         div(class='form-group has-success')
+          label(for='genero')= prf.genero
          div(class='form-group has-success')
           label(for='nacionalidad')= 'Cédula de Identidad'
-          input(type='nacionalidad' name='cedula' id='cedula' placeholder='cédula' class='form-control' style='text-transform:uppercase')
+         div(class='form-group has-success')
+          label(for='nacionalidad')= prf.ci
          div(class='form-group has-success')
           label(for='estcivil')='Área'
-          input(type='estcivil' name='area' id='area' placeholder='área' class='form-control' style='text-transform:uppercase')
+         div(class='form-group has-success')
+          label(for='area')= prf.area
          div(class='form-group has-success')
           label(for='ocupacion')='Especialidad'
-          input(type='ocupacion' name='especialidad' id='especialidad' placeholder='especialidad' class='form-control' style='text-transform:uppercase')
+         div(class='form-group has-success')
+          label(for='ocupacion')= prf.especialidad
          div(class='form-group has-success')
           label(for='email')= 'Email'
-          input(type='email' name='email' id='email' placeholder='Email' class='form-control')
          div(class='form-group has-success')
-          label(for='password')= 'Password'
-          input(type='password' name='password' id='password' placeholder='Password' class='form-control')
+          label(for='email')= prf.email
                    
-         button(type='submit' class='btn btn-primary')= 'Registrar'
+         
  .container
 
     hr        

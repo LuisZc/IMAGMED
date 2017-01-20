@@ -15,14 +15,14 @@ module.exports = function(passport){
 
    passport.use(new LocalStrategy({
           passReqToCallBack : true
-   }, function(user, email, done){
+   }, function(useremail, password, done){
    	var session = require('.././database/config');
-         
-         console.log(email);
-        //  console.log(password);
+        // console.log(user);
+         console.log(password);
+        // console.log(password);
          // console.log(done);
           session
-		 .run('match(usr:User)  where usr.email="'+user+'" return usr LIMIT 25')
+		 .run('match(usr:User)  where usr.email="'+useremail+'" return usr LIMIT 25')
 		 .then(function(result2){
 			 var userArr = [];
 			 console.log(result2);
@@ -30,16 +30,18 @@ module.exports = function(passport){
 				 userArr.push({
 					 id: record._fields[0].identity.low,
 					 username: record._fields[0].properties.username,
-					 email: record._fields[0].properties.email
+					 email: record._fields[0].properties.email,
+					 profile: record._fields[0].properties.profile
 
 					 
 				 });
-				 if(bcrypt.compareSync(email,  record._fields[0].properties.password)){
+				 if(bcrypt.compareSync(password,  record._fields[0].properties.password)){
                        console.log('El Password es correcto');
                        return done(null, {
                               id: record._fields[0].identity.low,
 					          nombre: record._fields[0].properties.username,
-					          email: record._fields[0].properties.email
+					          email: record._fields[0].properties.email,
+					          perfil: record._fields[0].properties.profile
                        });
                        session.close();
 

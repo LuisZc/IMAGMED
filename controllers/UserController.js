@@ -33,7 +33,10 @@ module.exports = {
 	},
 	
 	getNewPatient : function(req, res, next){
-		return res.render('users/patient');
+		return res.render('users/patient',{
+           isAuthenticated : req.isAuthenticated(),
+           user : req.user
+    });
 	},
 
 	postNewPatient: function(req, res, next){
@@ -42,7 +45,7 @@ module.exports = {
 		//var password = bcrypt.hashSync(req.body.password, salt);
         var session = require('.././database/config');
          var name = req.body.nomape;
-         var age =  req.body.edad;
+         var birthdate =  req.body.birthdate;
          var gender =  req.body.genero;
          var nationality =  req.body.nacionalidad;
          var civil_stt =  req.body.estcivil;
@@ -54,7 +57,7 @@ module.exports = {
          //console.log(password);
         console.log(session);
         session
-        .run('CREATE(ptn:Patient {name:{nameParam}, age:{ageParam}, gender:{genderParam}, nationality:{nationalityParam}, civil_stt:{civil_sttParam},ocupation:{ocupationParam}, birthplace:{birthplaceParam}, place_resi:{place_resiParam},phone:{phoneParam}})', {nameParam:name, ageParam:age, genderParam:gender, nationalityParam:nationality,civil_sttParam:civil_stt, ocupationParam:ocupation, birthplaceParam:birthplace,place_resiParam:place_resi,phoneParam:phone})
+        .run('CREATE(ptn:Patient {name:{nameParam}, birthdate:{birthdateParam}, gender:{genderParam}, nationality:{nationalityParam}, civil_stt:{civil_sttParam},ocupation:{ocupationParam}, birthplace:{birthplaceParam}, place_resi:{place_resiParam},phone:{phoneParam}})', {nameParam:name, birthdateParam:birthdate, genderParam:gender, nationalityParam:nationality,civil_sttParam:civil_stt, ocupationParam:ocupation, birthplaceParam:birthplace,place_resiParam:place_resi,phoneParam:phone})
         .then(function(result){
 		  // req.flash('info', 'Se ha registrado correctamente ya puede iniiar session');
 		  //req.flash('info', 'Se ha registrado exitosamente el paciente')
@@ -68,24 +71,29 @@ module.exports = {
           //res.redirect('/');
 	},
 	getNewDoctor: function(req, res, next){
-        return res.render('users/doctor');
+        return res.render('users/doctor',{
+           isAuthenticated : req.isAuthenticated(),
+           user : req.user
+        });
 	},
 	postNewDoctor: function(req, res, next){
 		var salt = bcrypt.genSaltSync(10);
 		var password = bcrypt.hashSync(req.body.password, salt);
 		var session = require('.././database/config');
+         var profile="DOCTOR";
          var name = req.body.nomape;
-         var age =  req.body.edad;
+         var birthdate =  req.body.birthdate;
          var gender =  req.body.genero;
          var identity_card =  req.body.cedula;
          var area= req.body.area;
          var specialty= req.body.especialidad;
          var email =  req.body.email;
+         console.log(birthdate);
          session
-         .run('CREATE(dr:Doctor {name:{nameParam}, age:{ageParam}, gender:{genderParam}, identity_card:{identity_cardParam}, area:{areaParam}, specialty:{specialtyParam}})', {nameParam:name, ageParam:age, genderParam:gender, identity_cardParam:identity_card, areaParam:area, specialtyParam:specialty})
+         .run('CREATE(dr:Doctor {name:{nameParam}, birthdate:{birthdateParam}, gender:{genderParam}, identity_card:{identity_cardParam}, area:{areaParam}, specialty:{specialtyParam}})', {nameParam:name, birthdateParam:birthdate, genderParam:gender, identity_cardParam:identity_card, areaParam:area, specialtyParam:specialty})
          .then(function(result){
          	  session
-         	  .run('CREATE(usr:User {username:{usernameParam}, email:{emailParam}, password:{passwordParam}})', {usernameParam:name, emailParam:email, passwordParam:password})
+         	  .run('CREATE(usr:User {username:{usernameParam}, email:{emailParam}, profile:{profileParam}, password:{passwordParam}})', {usernameParam:name, emailParam:email, profileParam:profile, passwordParam:password})
          	  .then(function(result1){
                  session
                  .run('MATCH(dr:Doctor {name:{nameParam}}), (usr:User {username:{nameParam}}) MERGE(usr)-[bgu:belongs_usr]->(dr)', {nameParam:name})
@@ -123,8 +131,8 @@ module.exports = {
          var username = req.body.nombre;
          var email =  req.body.email;
        // var password = req.body.password;
-         console.log(password);
-        console.log(session);
+      //   console.log(password);
+        //console.log(session);
         session
         .run('CREATE(usr:User {username:{usernameParam}, email:{emailParam}, password:{passwordParam}})', {usernameParam:username, emailParam:email, passwordParam:password } )
         .then(function(result){
@@ -152,12 +160,62 @@ module.exports = {
 
 
 	 getUserPanel : function(req, res, next){
-	 	res.render('users/panel',{
-			isAuthenticated : req.isAuthenticated(),
-			user : req.user
+ 
+     if(req.user.perfil== 'ADMINISTRATOR'){
+        res.render('users/panelsu',{
+         isAuthenticated : req.isAuthenticated(),
+         user : req.user
 
-		});
-	 }
+       });
+
+     }else{
+       res.render('users/panel',{
+        isAuthenticated : req.isAuthenticated(),
+        user : req.user
+
+       });
+
+     }
+	 	
+	 },
+    getProfile: function(req, res, next){
+      var session = require('.././database/config');
+      var nombre = req.user.nombre;
+      session
+      .run('Match (usr:User {username:{nameParam}})-[blu:belongs_usr]->(dr:Doctor {name:{nameParam}}) RETURN usr, dr',{nameParam: nombre})
+      .then(function(result){
+        var arrayProfile=[];
+        result.records.forEach(function(record){
+          arrayProfile.push({
+            id: record._fields[0].identity.low,
+            perfil: record._fields[0].properties.profile,
+            nombre: record._fields[0].properties.username,
+            email: record._fields[0].properties.email,
+            fechana: record._fields[1].properties.birthdate,
+            genero: record._fields[1].properties.gender,
+            ci: record._fields[1].properties.identity_card,
+            area:record._fields[1].properties.area,
+            especialidad:record._fields[1].properties.specialty
+
+          });
+          
+        });
+        res.render('users/profileuser', {
+        isAuthenticated : req.isAuthenticated(),
+          user : req.user,
+          perfil: arrayProfile
+      });
+
+      })
+      .catch(function(err){
+          console.log('Error Profile');
+       console.log(err);
+     });
+      
+     
+      }
+
+    
 
 
 	 

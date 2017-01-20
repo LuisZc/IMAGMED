@@ -10,14 +10,14 @@ block content
         h2.panel-title SISTEMA DE GESTIÓN
         br
         h2.panel-title 
-           small  Perfil de Usuario 
+         small  Perfil de Administrador
        
   
-     if isAuthenticated
-       
    font(size='5')  
 
-     p= 'Bienvenido' +' '+ user.nombre
+     p= 'Bienvenido' +" "+ user.nombre
+     br 
+     br
   div(class='row')        
     div(class='col-md-3')
      div(class='panel panel-default')
@@ -25,11 +25,32 @@ block content
         h3.panel-title Nuevos Ingresos
        div(class='panel-body')
         div(class='form-group has-success')
+ 
          font(size='3')
            p
-            |Ingresar Imagenes: 
-            a(href='menu') Nueva Imagen
-             
+            |Ingresar Doctor: 
+            a(href='doctors') Nuevo Doctor
+         font(size='3')
+           p
+            |Ingresar Paciente: 
+            a(href='patients') Nuevo Paciente      
+         font(size='3')
+           p
+            |Ingresar Área Médica: 
+            a(href='/usersu/nwar') Nueva Área      
+         font(size='3')
+           p
+            |Ingresar Tipo de Vista: 
+            a(href='/usersu/nwvw') Nuevo Tipo de Vista 
+         font(size='3')
+           p
+            |Ingresar Técnica de Escaneo: 
+            a(href='/usersu/nwtch') Nueva Técnica de Escaneo 
+         font(size='3')
+           p
+            |Ingresar Procedimiento 
+            a(href='/usersu/nwpr') Nuevo Procedimiento
+
     div(class='col-md-6')
      img(src='/images/imagmed.png' width="700" height="400")       
     div(class='col-md-3') 
@@ -53,7 +74,7 @@ block content
           font(size='3')
             p
              |Imagenes: 
-             a(href='viewtechnique') Por Técnica	 
+             a(href='viewtechnique') Por Técnica   
  .container
 
     hr        

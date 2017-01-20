@@ -1,0 +1,58 @@
+extends .././templates/default
+
+block content
+  br
+  br
+  br
+  .panel.panel-default
+   .panel-heading
+     h2.panel-title Sistema de Gestión 
+     br
+     h2.panel-title 
+        small Nuevo Procedimiento
+     
+    div(class='form-group')
+   form(method="POST", enctype="multipart/form-data", action="http://localhost:3000/usersu/nwpr")
+     div(class='row')
+        div(class='col-md-2 col-md-offset-1')
+         div(class='form-group has-success')
+          
+         div(class='form-group has-success')
+          label(for='typeprocess') Nombre del Procedimiento
+          input(type="text", name="typeprocess" class='form-control' title='Ingresar el nombre del Procedimiento')
+         div(class='form-group has-success')
+          label(for='descriptionpr') Descripción del Procedimiento
+          input(type="text", name="descriptionpr" class='form-control' title='Descripción') 
+        
+         div(class='form-group has-success')
+           input(type="submit" value="Guardar" class="btn btn-primary") 
+
+  .container
+
+    hr        
+    .col-md-4
+    
+       p
+           | UNIVERSIDAD CENTRAL DEL ECUADOR
+           br
+           | Todos los derechos reservados
+           br
+           img(src='/images/imagmedpequeño.png' width="160" height="60")
+    .col-md-4
+     .text-center.center-block
+       h2.txt-railway Síguenos
+       br
+       a(href='https://www.facebook.com/bootsnipp')
+         i#social-fb.fa.fa-facebook-square.fa-3x.social 
+       a(href='https://twitter.com/bootsnipp')
+         i#social-tw.fa.fa-twitter-square.fa-3x.social 
+       a(href='https://plus.google.com/+Bootsnipp-page')
+         i#social-gp.fa.fa-google-plus-square.fa-3x.social 
+       a(href='mailto:bootsnipp@gmail.com')
+         i#social-em.fa.fa-envelope-square.fa-3x.social 
+    .col-md-4
+
+        h3 Contacto:
+        p Dirección: Av.Universitaria.
+        p Telefono: 3453-529  
+        p Correo: lapadilla@rutatec.com 

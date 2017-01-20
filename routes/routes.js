@@ -20,13 +20,13 @@ router.post('/auth/signin', passport.authenticate('local', {
 }));
 
 //Rutas Pacientes
+router.get('/users/profile', AuthMiddleware.isLogged ,controllers.UserController.getProfile);
 
-router.get('/users/patients', controllers.UserController.getNewPatient);
+router.get('/users/patients',AuthMiddleware.isLogged ,controllers.UserController.getNewPatient);
+router.post('/users/patients', AuthMiddleware.isLogged ,controllers.UserController.postNewPatient);
 
-router.post('/users/patients', controllers.UserController.postNewPatient);
-
-router.get('/users/doctors', controllers.UserController.getNewDoctor);
-router.post('/users/doctors', controllers.UserController.postNewDoctor);
+router.get('/users/doctors', AuthMiddleware.isLogged ,controllers.UserController.getNewDoctor);
+router.post('/users/doctors', AuthMiddleware.isLogged ,controllers.UserController.postNewDoctor);
 
 router.get('/auth/logout', controllers.UserController.logout);
 router.get('/users/panel', AuthMiddleware.isLogged ,controllers.UserController.getUserPanel);
@@ -34,7 +34,7 @@ router.get('/users/menu', AuthMiddleware.isLogged,controllers.ImgController.getE
 router.get('/users/views',AuthMiddleware.isLogged, controllers.ImgController.getViewImg);
 router.post('/users/saved',AuthMiddleware.isLogged,controllers.ImgController.postEntryImgDb);
 router.post('/users/save',AuthMiddleware.isLogged,controllers.ImgController.postEntryImg);
-router.post('/users/views2', controllers.ImgController.postViewImg);
+router.post('/users/views2',AuthMiddleware.isLogged, controllers.ImgController.postViewImg);
 
 router.get('/users/viewarea',AuthMiddleware.isLogged, controllers.ImgController.getViewImgArea);
 router.post('/users/viewarea2', controllers.ImgController.postViewImgArea);
@@ -42,6 +42,21 @@ router.get('/users/viewtechnique',AuthMiddleware.isLogged, controllers.ImgContro
 router.post('/users/viewtechnique2', controllers.ImgController.postViewImgTechnique);
 router.get('/users/viewprocess',AuthMiddleware.isLogged, controllers.ImgController.getViewImgProcess);
 router.post('/users/viewprocess2', controllers.ImgController.postViewImgProcess);
+
+router.post('/users/imgobs',AuthMiddleware.isLogged, controllers.ImgController.postAddImgObs);
+router.post('/users/svimgobs',AuthMiddleware.isLogged, controllers.ImgController.postSaveImgObs);
+
+//Rutas Admin
+router.post('/usersu/nwar', AuthMiddleware.isLogged ,controllers.UsersuController.postNewArea);
+router.get('/usersu/nwar', AuthMiddleware.isLogged ,controllers.UsersuController.getNewArea);
+router.post('/usersu/nwvw', AuthMiddleware.isLogged ,controllers.UsersuController.postNewView);
+router.get('/usersu/nwvw', AuthMiddleware.isLogged ,controllers.UsersuController.getNewView);
+router.post('/usersu/nwtch', AuthMiddleware.isLogged ,controllers.UsersuController.postNewTechnique);
+router.get('/usersu/nwtch', AuthMiddleware.isLogged ,controllers.UsersuController.getNewTechnique);
+router.post('/usersu/nwpr', AuthMiddleware.isLogged ,controllers.UsersuController.postNewProcess);
+router.get('/usersu/nwpr', AuthMiddleware.isLogged ,controllers.UsersuController.getNewProcess);
+
+
 /* GET home page. */
 /* router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });

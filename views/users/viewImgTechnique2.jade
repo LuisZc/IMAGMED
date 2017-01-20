@@ -31,7 +31,7 @@ block content
             div(class='form-group')
             label(for='namedoctor')= ' Responsable:' + item.namedoctor
             div(class='form-group')
-            label(for='namedoctor')= ' Paciente:' + item.namedoctor
+            label(for='namepaciente')= ' Paciente:' + item.name
             div(class='form-group') 
             p=" Vista :"+item.vista
             div(class='form-group')
@@ -41,7 +41,18 @@ block content
             div(class='form-group')
             p=" Enfoque :"+item.enfoque
             div(class='form-group')
-            p=" Observaciones :"+item.observaciones
+            label(for='Obsercaciones')= 'Observaciones :'
+            div(class='form-group')
+            label(for='Obsercaciones')= 'Observaciones :'
+            -each itmobs in obsv
+             if itmobs.id.toString() == item.id.toString()
+              div(class='form-group')
+               p=" Médico Encargado :"+itmobs.responsable
+               div(class='form-group')
+               p=" Fecha :"+itmobs.dateobs
+               div(class='form-group')
+               p=" Observacion :"+itmobs.observacion
+               br
   .container
 
     hr        

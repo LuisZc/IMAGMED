@@ -24,13 +24,21 @@ block content
           input(type='birthdate' name='birthdate' id='birthdate' placeholder='día/mes/año' class='form-control' style='text-transform:uppercase')
          div(class='form-group has-success')
           label(for='genero')= 'Género'
-          input(type='genero' name='genero' id='genero' placeholder='Genero' class='form-control' style='text-transform:uppercase')
+          select(class="selectpicker show-tick" id="genero" data-width="100%" name="genero" title='GÉNERO') 
+           option(data-icon='glyphicon-user') MASCULINO
+           option(data-icon='glyphicon-user') FEMENINO
          div(class='form-group has-success')
           label(for='nacionalidad')= 'Nacionalidad'
           input(type='nacionalidad' name='nacionalidad' id='nacionalidad' placeholder='Nacionalidad' class='form-control' style='text-transform:uppercase')
          div(class='form-group has-success')
           label(for='estcivil')='Estado Civil'
-          input(type='estcivil' name='estcivil' id='estcivil' placeholder='Estado Civil' class='form-control' style='text-transform:uppercase')
+          select(class="selectpicker show-tick" id="estcivil" data-width="100%" name="estcivil" title='ESTADO CIVIL') 
+           option(data-icon='glyphicon-user') CASADO/A
+           option(data-icon='glyphicon-user') SOLTERO/A
+           option(data-icon='glyphicon-user') DIVORCIADO/A
+           option(data-icon='glyphicon-user') VIUDO/A
+           option(data-icon='glyphicon-user') UNIÓN DE HECHO
+          
          div(class='form-group has-success')
           label(for='ocupacion')='Ocupación'
           input(type='ocupacion' name='ocupacion' id='ocupacion' placeholder='Ocupación' class='form-control' style='text-transform:uppercase')

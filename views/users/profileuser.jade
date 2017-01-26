@@ -8,7 +8,6 @@ block content
  .panel.panel-default
       .panel-heading
         h2.panel-title SISTEMA DE GESTIÓN
-        h2
            small   Perfil 
  div(class='row')
   div(class='col-md-6 col-md-offset-3')
@@ -16,38 +15,38 @@ block content
      div(class='panel-heading')
        h3.panel-title Datos 
       div(class='panel-body')
+
       -each prf in perfil
-       
-         div(class='')
-          label(for='perfil')= prf.perfil
-         div(class='form-group has-success')
-          label(for='nomape')= 'Nombres y Apellidos'
-         div(class='form-group has-success')
-          label(for='nombre')= prf.nombre
-         div(class='form-group has-success')
-          label(for='birthdate')= 'Fecha de Nacimiento'
-         div(class='form-group has-success')
-          label(for='birthdate')= prf.fechana
-         div(class='form-group has-success')
-          label(for='genero')= 'Género'
-         div(class='form-group has-success')
-          label(for='genero')= prf.genero
-         div(class='form-group has-success')
-          label(for='nacionalidad')= 'Cédula de Identidad'
-         div(class='form-group has-success')
-          label(for='nacionalidad')= prf.ci
-         div(class='form-group has-success')
-          label(for='estcivil')='Área'
-         div(class='form-group has-success')
-          label(for='area')= prf.area
-         div(class='form-group has-success')
-          label(for='ocupacion')='Especialidad'
-         div(class='form-group has-success')
-          label(for='ocupacion')= prf.especialidad
-         div(class='form-group has-success')
-          label(for='email')= 'Email'
-         div(class='form-group has-success')
-          label(for='email')= prf.email
+        
+         
+          table.table.table-striped
+            thead
+              tr
+                th Datos Personales
+            tbody
+              tr
+                th Nombres y Apellidos:
+                td #{prf.nombre}
+              tr
+                th Fecha de Nacimiento:
+                td #{prf.fechana}
+              tr
+                th Género:
+                td #{prf.genero}
+              tr
+                th Cedula de Identidad:
+                td #{prf.ci}
+              tr
+                th Área:
+                td #{prf.area}
+              tr
+                th Especialidad:
+                td #{prf.especialidad}
+              tr
+                th Email:
+                td #{prf.email}
+
+          
                    
          
  .container

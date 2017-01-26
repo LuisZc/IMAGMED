@@ -11,8 +11,8 @@ block content
   br
   div(class='row')
    
-    
-    div(class='col-md-6 col-xs-10')
+    div(class='col-xs-6 col-md-4')
+    div(class='col-xs-6 col-md-5')
      div(class='panel panel-default')
       div(class='panel-heading')
         h3.panel-title Registro de Imagenes del Paciente
@@ -37,7 +37,8 @@ block content
 
              br
              br
-             img(src="data:image/jpg;base64,"+item.img alt="Chicago" width="500" height="400")
+             div(class='form-group')
+             img(src="data:image/jpg;base64,"+item.img alt="Chicago" width="auto" height="auto")
              br
              br
             .enlacesfavoritos 
@@ -68,6 +69,7 @@ block content
                br
              div(class='form-group')    
               input(type="submit" value="AÑADIR OBSERVACIÓN" class='btn btn-primary') 
+    div(class='col-xs-6 col-md-4')          
   .container
 
     hr        

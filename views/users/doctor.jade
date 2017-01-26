@@ -22,9 +22,13 @@ block content
          div(class='form-group has-success')
           label(for='birthdate')= 'Fecha de Nacimiento'
           input(type='birthdate' name='birthdate' id='birthdate' placeholder='día/mes/año' class='form-control' style='text-transform:uppercase')
-         div(class='form-group has-success')
+        
+
+         div(class='form-group has-success')       
           label(for='genero')= 'Género'
-          input(type='genero' name='genero' id='genero' placeholder='Género' class='form-control' style='text-transform:uppercase')
+          select(class="selectpicker show-tick" id="genero" data-width="100%" name="genero" title='GÉNERO') 
+           option(data-icon='glyphicon-user') Masculino
+           option(data-icon='glyphicon-user') Femenino
          div(class='form-group has-success')
           label(for='nacionalidad')= 'Cédula de Identidad'
           input(type='nacionalidad' name='cedula' id='cedula' placeholder='cédula' class='form-control' style='text-transform:uppercase')
@@ -41,7 +45,7 @@ block content
           label(for='password')= 'Password'
           input(type='password' name='password' id='password' placeholder='Password' class='form-control')
                    
-         button(type='submit' class='btn btn-primary')= 'Registrar'
+         button(type='submit' class='btn btn-primary' data-loading-text='Registrando')= 'Registrar'
  .container
 
     hr        

@@ -21,6 +21,7 @@ router.post('/auth/signin', passport.authenticate('local', {
 
 //Rutas Pacientes
 router.get('/users/profile', AuthMiddleware.isLogged ,controllers.UserController.getProfile);
+router.post('/users/profile', AuthMiddleware.isLogged ,controllers.UserController.postProfile);
 
 router.get('/users/patients',AuthMiddleware.isLogged ,controllers.UserController.getNewPatient);
 router.post('/users/patients', AuthMiddleware.isLogged ,controllers.UserController.postNewPatient);

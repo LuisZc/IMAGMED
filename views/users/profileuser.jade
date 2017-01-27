@@ -11,6 +11,8 @@ block content
            small   Perfil 
  div(class='row')
   div(class='col-md-6 col-md-offset-3')
+    if message.length > 0
+     div(class='alert alert-success', role='alert-success')= message
     div(class='panel panel-default')
      div(class='panel-heading')
        h3.panel-title Datos 
@@ -49,7 +51,7 @@ block content
          form(action='http://localhost:3000/users/profile' method='post' autocomplete='off')
           div(class='form-group has-success')
             label(for='oldpassword')= 'Password Anterior'
-            input(type='password' name='oldpassword' id='password' placeholder='Viejo Password' class='form-control')     
+            input(type='password' name='oldpassword' id='oldpassword' placeholder='Viejo Password' class='form-control')     
           div(class='form-group has-success')
             label(for='newpassword')= 'Nuevo Password'
             input(type='password' name='password' id='password' placeholder='Nuevo Password' class='form-control')   

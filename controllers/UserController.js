@@ -1,5 +1,5 @@
 var bcrypt = require('bcryptjs')
-
+var passport = require('passport')
 
 module.exports = {
 	getSignUp : function(req, res, next){
@@ -242,8 +242,11 @@ module.exports = {
           });
           
         });
+        //return res.render('users/signin', {message: req.flash('info'), });
+        
         res.render('users/profileuser', {
-        isAuthenticated : req.isAuthenticated(),
+          isAuthenticated : req.isAuthenticated(),
+          message: req.flash('info'),
           user : req.user,
           perfil: arrayProfile
       });
@@ -255,7 +258,61 @@ module.exports = {
      });
       
      
-      }
+      },
+      postProfile: function(req, res, next){
+       var session = require('.././database/config');
+       var email = req.user.email;
+      
+        var oldpassword=req.body.oldpassword;
+        var newpassword1=req.body.password;
+        var newpassword2=req.body.password1;
+        //console.log(oldpassword);
+        ///console.log(newpassword1);
+        //console.log(newpassword2);
+        if(newpassword1 == newpassword2){
+          var salt = bcrypt.genSaltSync(10);
+         var bcpassword = bcrypt.hashSync(newpassword1, salt);
+                  
+          session
+          .run( 'match(usr:User)  where usr.email={emailParam} return usr ',{emailParam:email})
+          .then(function(result){
+          
+            result.records.forEach(function(record){
+               if(bcrypt.compareSync(oldpassword,  record._fields[0].properties.password)){
+                  session
+                  .run('Match(usr:User)  where usr.email={emailParam} set usr.password={nwpasswordParam} return usr ',{emailParam:email, nwpasswordParam:bcpassword})
+                  .then(function(result1){
+                     req.flash('info', 'El Cambio de Contrasena se a realizado correctamente');
+                     res.redirect('/users/profile');
+                     }
+                     session.close();
+                    )
+                  .catch(function(err){
+                    console.log(err);
+                  });
+              
+                 session.close();
+              
+               }else{
+                 req.flash('info', 'El Actual Password Ingresado es Incorrecto');
+                 res.redirect('/users/profile');
+                 session.close();
+               }
+
+            });
+         
+          })
+          .catch(function(err){
+           console.log(err);
+          });
+        } //end if
+        else{
+              req.flash('info', 'El Nuevo password Ingresado no coincide en la confirmación');
+              res.redirect('/users/profile');
+        }
+      //  req.flash('info', 'Se ha registrado exitosamente ya puede iniciar session');
+         //res.redirect('/users/profile');
+     }
 
     
 

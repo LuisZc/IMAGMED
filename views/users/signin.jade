@@ -10,10 +10,10 @@ block content
  div(class='row')
   div(class='col-md-6 col-md-offset-3')
    if message.length > 0
-   div(class='alert alert-success', role='alert-success')= message
-    div(class='panel panel-default')
-     div(class='panel-heading')
-      h3.panel-title Iniciar Sesión
+    div(class='alert alert-success', role='alert-success')= message
+   div(class='panel panel-default')
+      div(class='panel-heading')
+       h3.panel-title Iniciar Sesión
       div(class='panel-body')
        form(action='http://localhost:3000/auth/signin' method='post')
          div(class='form-group')

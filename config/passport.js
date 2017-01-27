@@ -22,7 +22,7 @@ module.exports = function(passport){
         // console.log(password);
          // console.log(done);
           session
-		 .run('match(usr:User)  where usr.email="'+useremail+'" return usr LIMIT 25')
+		 .run('match(usr:User)  where usr.email="'+useremail+'" return usr ')
 		 .then(function(result2){
 			 var userArr = [];
 			 console.log(result2);
@@ -35,6 +35,7 @@ module.exports = function(passport){
 
 					 
 				 });
+			
 				 if(bcrypt.compareSync(password,  record._fields[0].properties.password)){
                        console.log('El Password es correcto');
                        return done(null, {

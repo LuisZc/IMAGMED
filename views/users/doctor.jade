@@ -33,11 +33,15 @@ block content
           label(for='nacionalidad')= 'Cédula de Identidad'
           input(type='nacionalidad' name='cedula' id='cedula' placeholder='cédula' class='form-control' style='text-transform:uppercase')
          div(class='form-group has-success')
-          label(for='estcivil')='Área'
-          input(type='estcivil' name='area' id='area' placeholder='área' class='form-control' style='text-transform:uppercase')
+          label(for='area') Área
+          select( class="selectpicker" data-style="btn-default" name="area" title='Escoger el Area') 
+            -each item in typesAr
+              option #{item.typear}
          div(class='form-group has-success')
-          label(for='ocupacion')='Especialidad'
-          input(type='ocupacion' name='especialidad' id='especialidad' placeholder='especialidad' class='form-control' style='text-transform:uppercase')
+          label(for='especialidad') Especialidad
+          select( class="selectpicker" data-style="btn-default" name="especialidad" title='Escoger la Especialidad') 
+            -each item in nameSpArr
+              option #{item.namesp}
          div(class='form-group has-success')
           label(for='email')= 'Email'
           input(type='email' name='email' id='email' placeholder='Email' class='form-control')

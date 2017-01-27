@@ -19,8 +19,8 @@ module.exports = {
       });
       console.log(areaNameArr);
       res.render('users/signup',{
-           // isAuthenticated : req.isAuthenticated(),
-          //  user : req.user,
+            isAuthenticated : req.isAuthenticated(),
+            user : req.user,
             names: areaNameArr
            });
       session.close();
@@ -71,10 +71,51 @@ module.exports = {
           //res.redirect('/');
 	},
 	getNewDoctor: function(req, res, next){
-        return res.render('users/doctor',{
-           isAuthenticated : req.isAuthenticated(),
-           user : req.user
-        });
+    var session = require('.././database/config');
+                 session
+                  .run('MATCH(ar:Area) RETURN ar.type')
+                  .then(function(result){
+                   var typeArArr = [];
+                   result.records.forEach(function(record){
+                   typeArArr.push({
+                   typear: record._fields[0]
+          
+                   });
+                  });
+                     session
+                    .run('MATCH(sp:Specialty) RETURN sp.namesp')
+                    .then(function(result){
+                         var nameSpArr = [];
+                         result.records.forEach(function(record){
+                         nameSpArr.push({
+                         namesp: record._fields[0]
+          
+                         });
+                        });
+
+                        res.render('users/doctor',{
+                       isAuthenticated : req.isAuthenticated(),
+                       user : req.user,
+                       typesAr: typeArArr,
+                       nameSpArr: nameSpArr
+                       });
+                        session.close();
+                    })
+                    .catch(function(err){
+                     console.log(err);
+                     });
+                   
+      
+                  session.close();
+
+                 })
+                 .catch(function(err){
+                  console.log(err);
+                  });
+   //     return res.render('users/doctor',{
+   //        isAuthenticated : req.isAuthenticated(),
+   //        user : req.user
+    //    });
 	},
 	postNewDoctor: function(req, res, next){
 		var salt = bcrypt.genSaltSync(10);
@@ -90,13 +131,13 @@ module.exports = {
          var email =  req.body.email;
          console.log(birthdate);
          session
-         .run('CREATE(dr:Doctor {name:{nameParam}, birthdate:{birthdateParam}, gender:{genderParam}, identity_card:{identity_cardParam}, area:{areaParam}, specialty:{specialtyParam}})', {nameParam:name, birthdateParam:birthdate, genderParam:gender, identity_cardParam:identity_card, areaParam:area, specialtyParam:specialty})
+         .run('CREATE(dr:Doctor {name:{nameParam}, birthdate:{birthdateParam}, gender:{genderParam}, identity_card:{identity_cardParam}})', {nameParam:name, birthdateParam:birthdate, genderParam:gender, identity_cardParam:identity_card, areaParam:area, specialtyParam:specialty})
          .then(function(result){
          	  session
          	  .run('CREATE(usr:User {username:{usernameParam}, email:{emailParam}, profile:{profileParam}, password:{passwordParam}})', {usernameParam:name, emailParam:email, profileParam:profile, passwordParam:password})
          	  .then(function(result1){
                  session
-                 .run('MATCH(dr:Doctor {name:{nameParam}}), (usr:User {username:{nameParam}}) MERGE(usr)-[bgu:belongs_usr]->(dr)', {nameParam:name})
+                 .run('MATCH(dr:Doctor {name:{nameParam}}), (usr:User {username:{nameParam}}), (sp:Specialty {namesp:{specialtyParam}}), (ar:Area {type:{areaParam}}) MERGE(usr)-[blu:belongs_usr]->(dr) MERGE(dr)-[bldrs:belongs_drs]->(sp) MERGE(dr)-[bldra:belongs_dra]->(ar)', {nameParam:name, specialtyParam:specialty, areaParam:area})
                  .then(function(result2){
                        res.redirect('/users/doctors');
 		               session.close();
@@ -182,7 +223,7 @@ module.exports = {
       var session = require('.././database/config');
       var nombre = req.user.nombre;
       session
-      .run('Match (usr:User {username:{nameParam}})-[blu:belongs_usr]->(dr:Doctor {name:{nameParam}}) RETURN usr, dr',{nameParam: nombre})
+      .run('Match (usr:User {username:{nameParam}})-[blu:belongs_usr]->(dr:Doctor {name:{nameParam}})-[bldrs:belongs_drs]->(sp), (dr:Doctor {name:{nameParam}})-[bldra:belongs_dra]->(ar) RETURN usr, dr, sp, ar',{nameParam: nombre})
       .then(function(result){
         var arrayProfile=[];
         result.records.forEach(function(record){
@@ -194,8 +235,9 @@ module.exports = {
             fechana: record._fields[1].properties.birthdate,
             genero: record._fields[1].properties.gender,
             ci: record._fields[1].properties.identity_card,
-            area:record._fields[1].properties.area,
-            especialidad:record._fields[1].properties.specialty
+            especialidad:record._fields[2].properties.namesp,
+            area:record._fields[3].properties.type
+            
 
           });
           

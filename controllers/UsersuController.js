@@ -119,6 +119,34 @@ module.exports = {
        console.log(err);
      });   
           
+  },
+  getNewSpecialty : function(req, res, next){
+    return res.render('usersu/newspecialty',{
+           isAuthenticated : req.isAuthenticated(),
+           user : req.user
+    });
+  },
+    postNewSpecialty: function(req, res, next){
+
+        var session = require('.././database/config');
+         var namesp = req.body.nombrespe;
+         var description =  req.body.descriptionsp;
+      
+    
+        console.log(session);
+        session
+        .run('CREATE(sp:Specialty {namesp:{namespParam}, description:{descriptionParam}})', {namespParam:namesp, descriptionParam:description})
+        .then(function(result){
+      // req.flash('info', 'Se ha registrado correctamente ya puede iniiar session');
+      //req.flash('info', 'Se ha registrado exitosamente el paciente')
+       res.redirect('/usersu/nwspm');
+       session.close();
+     })
+        .catch(function(err){
+          console.log('error esta dando');
+       console.log(err);
+     });   
+          
   }
 
 

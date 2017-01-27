@@ -55,7 +55,8 @@ router.post('/usersu/nwtch', AuthMiddleware.isLogged ,controllers.UsersuControll
 router.get('/usersu/nwtch', AuthMiddleware.isLogged ,controllers.UsersuController.getNewTechnique);
 router.post('/usersu/nwpr', AuthMiddleware.isLogged ,controllers.UsersuController.postNewProcess);
 router.get('/usersu/nwpr', AuthMiddleware.isLogged ,controllers.UsersuController.getNewProcess);
-
+router.post('/usersu/nwspm', AuthMiddleware.isLogged ,controllers.UsersuController.postNewSpecialty);
+router.get('/usersu/nwspm', AuthMiddleware.isLogged ,controllers.UsersuController.getNewSpecialty);
 
 /* GET home page. */
 /* router.get('/', function(req, res, next) {

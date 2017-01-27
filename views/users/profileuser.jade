@@ -45,7 +45,18 @@ block content
               tr
                 th Email:
                 td #{prf.email}
-
+        div(class='panel-body')
+         form(action='http://localhost:3000/users/profile' method='post' autocomplete='off')
+          div(class='form-group has-success')
+            label(for='oldpassword')= 'Password Anterior'
+            input(type='password' name='oldpassword' id='password' placeholder='Viejo Password' class='form-control')     
+          div(class='form-group has-success')
+            label(for='newpassword')= 'Nuevo Password'
+            input(type='password' name='password' id='password' placeholder='Nuevo Password' class='form-control')   
+          div(class='form-group has-success')
+            label(for='newpassword1')= 'Nuevo Password'
+            input(type='password' name='password1' id='password1' placeholder='Nuevo Password' class='form-control')      
+            button(type='submit' class='btn btn-primary' data-loading-text='Registrando')= 'Aceptar'
           
                    
          

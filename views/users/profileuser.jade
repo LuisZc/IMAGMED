@@ -47,18 +47,22 @@ block content
               tr
                 th Email:
                 td #{prf.email}
-        div(class='panel-body')
+    div(class='panel panel-default')
+     div(class='panel-heading')
+       h3.panel-title 
+         a(data-toggle='collapse', href='#collapse1') Cambio de Contraseña 
+     #collapse1.panel-collapse.collapse 
          form(action='http://localhost:3000/users/profile' method='post' autocomplete='off')
           div(class='form-group has-success')
-            label(for='oldpassword')= 'Password Anterior'
-            input(type='password' name='oldpassword' id='oldpassword' placeholder='Viejo Password' class='form-control')     
+            label(for='oldpassword')= 'Actual'
+            input(type='password' name='oldpassword' id='password' size='30' placeholder='Contraseña actual' class='form-control')     
           div(class='form-group has-success')
-            label(for='newpassword')= 'Nuevo Password'
-            input(type='password' name='password' id='password' placeholder='Nuevo Password' class='form-control')   
+            label(for='newpassword')= 'Nueva'
+            input(type='password' name='password' id='password' size='30' placeholder='Contraseña nueva' class='form-control')   
           div(class='form-group has-success')
-            label(for='newpassword1')= 'Nuevo Password'
-            input(type='password' name='password1' id='password1' placeholder='Nuevo Password' class='form-control')      
-            button(type='submit' class='btn btn-primary' data-loading-text='Registrando')= 'Aceptar'
+            label(for='newpassword1')= 'Repetir contraseña nueva'
+            input(type='password' name='password1' id='password1' size='30' placeholder='Repetir contraseña nueva' class='form-control')      
+          button(type='submit' class='btn btn-primary' data-loading-text='Registrando')= 'Aceptar'
           
                    
          

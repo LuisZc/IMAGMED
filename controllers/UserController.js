@@ -284,8 +284,9 @@ module.exports = {
                   .then(function(result1){
                      req.flash('info', 'El Cambio de Contrasena se a realizado correctamente');
                      res.redirect('/users/profile');
-                     }
                      session.close();
+                     }
+                     
                     )
                   .catch(function(err){
                     console.log(err);

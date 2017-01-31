@@ -35,7 +35,9 @@ module.exports = function(passport){
 
 					 
 				 });
-			
+			//	 if(userArr[0]!= null){
+				 //	console.log("es mayor que cero");
+				// }
 				 if(bcrypt.compareSync(password,  record._fields[0].properties.password)){
                        console.log('El Password es correcto');
                        return done(null, {

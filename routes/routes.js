@@ -59,6 +59,13 @@ router.get('/usersu/nwpr', AuthMiddleware.isLogged ,controllers.UsersuController
 router.post('/usersu/nwspm', AuthMiddleware.isLogged ,controllers.UsersuController.postNewSpecialty);
 router.get('/usersu/nwspm', AuthMiddleware.isLogged ,controllers.UsersuController.getNewSpecialty);
 
+// Rutas Reportes
+router.get('/rspOne', controllers.reportsController.getReportOne);
+router.get('/rspPaciente', controllers.reportsController.getReportPtn);
+router.get('/rspImgArea', controllers.reportsController.getReportImgArea);
+router.get('/rspPtntoDr', controllers.reportsController.getReportLstPtnDr);
+router.get('/rsptoDr', controllers.reportsController.getReportLstDr);
+
 /* GET home page. */
 /* router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });

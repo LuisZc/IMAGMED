@@ -47,6 +47,8 @@ router.post('/users/viewprocess2', controllers.ImgController.postViewImgProcess)
 router.post('/users/imgobs',AuthMiddleware.isLogged, controllers.ImgController.postAddImgObs);
 router.post('/users/svimgobs',AuthMiddleware.isLogged, controllers.ImgController.postSaveImgObs);
 
+
+router.get('/users/primg',AuthMiddleware.isLogged, controllers.ImgController.getProcessImg);
 //Rutas Admin
 router.post('/usersu/nwar', AuthMiddleware.isLogged ,controllers.UsersuController.postNewArea);
 router.get('/usersu/nwar', AuthMiddleware.isLogged ,controllers.UsersuController.getNewArea);
@@ -58,13 +60,6 @@ router.post('/usersu/nwpr', AuthMiddleware.isLogged ,controllers.UsersuControlle
 router.get('/usersu/nwpr', AuthMiddleware.isLogged ,controllers.UsersuController.getNewProcess);
 router.post('/usersu/nwspm', AuthMiddleware.isLogged ,controllers.UsersuController.postNewSpecialty);
 router.get('/usersu/nwspm', AuthMiddleware.isLogged ,controllers.UsersuController.getNewSpecialty);
-
-// Rutas Reportes
-router.get('/rspOne', controllers.reportsController.getReportOne);
-router.get('/rspPaciente', controllers.reportsController.getReportPtn);
-router.get('/rspImgArea', controllers.reportsController.getReportImgArea);
-router.get('/rspPtntoDr', controllers.reportsController.getReportLstPtnDr);
-router.get('/rsptoDr', controllers.reportsController.getReportLstDr);
 
 /* GET home page. */
 /* router.get('/', function(req, res, next) {

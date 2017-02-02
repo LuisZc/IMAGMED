@@ -639,6 +639,15 @@ module.exports = {
       console.log(err);
       });
    
+   },
+
+   getProcessImg:function(req,res,next){
+    // res.redirect('/users/processimg');
+     return res.render('users/processimg',{
+           isAuthenticated : req.isAuthenticated(),
+           user : req.user
+    });
+
    }
 
 

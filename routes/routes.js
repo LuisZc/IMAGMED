@@ -35,6 +35,7 @@ router.get('/users/menu', AuthMiddleware.isLogged,controllers.ImgController.getE
 router.get('/users/views',AuthMiddleware.isLogged, controllers.ImgController.getViewImg);
 router.post('/users/saved',AuthMiddleware.isLogged,controllers.ImgController.postEntryImgDb);
 router.post('/users/save',AuthMiddleware.isLogged,controllers.ImgController.postEntryImg);
+//router.get('/users/save12',AuthMiddleware.isLogged,controllers.ImgController.getEntryImgDb);
 router.post('/users/views2',AuthMiddleware.isLogged, controllers.ImgController.postViewImg);
 
 router.get('/users/viewarea',AuthMiddleware.isLogged, controllers.ImgController.getViewImgArea);

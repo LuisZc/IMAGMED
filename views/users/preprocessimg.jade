@@ -27,34 +27,4 @@ block content
         div(class='form-group')    
          input(type="submit" value="Buscar" class='btn btn-primary') 
 
-     div(class='panel-heading')
-       h2.panel-title 
-         a(data-toggle='collapse', href='#collapse2') Imagnes por Area
-      #collapse2.panel-collapse.collapse 
-        div(class='form-group')
-        label(for="selectpickerArea") Area
-        select(class="selectpicker show-tick" data-width="auto" name="selectpickerArea" title='Escoger Area')
-         -each item in typesAr
-
-          option #{item.typear}
-
-     div(class='panel-heading')
-       h2.panel-title 
-         a(data-toggle='collapse', href='#collapse3') Imagnes por Tecnica
-      #collapse3.panel-collapse.collapse 
-        div(class='form-group')
-        label(for="selectpickerTechnique") Busqueda por Tecnica de Escaneo
-        select(class="selectpicker show-tick" data-width="auto" name="selectpickerTechnique" title='Escoger Tecnica de Escaneo')
-         -each item in typesTh
-          option #{item.typeth}
-
-     div(class='panel-heading')
-       h2.panel-title 
-         a(data-toggle='collapse', href='#collapse4') Imagnes por Procedimiento
-      #collapse4.panel-collapse.collapse 
-        div(class='form-group')
-        label(for="selectpickerProcess") Busqueda por Proceso
-        select(class="selectpicker show-tick" data-width="auto" name="selectpickerProcess" title='Escoger Proceso')
-         -each item in typesPr
-
-          option #{item.typepr} 
+  

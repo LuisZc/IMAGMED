@@ -7,17 +7,18 @@ var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
-var $ = require('jquery');
-require('./config/passport')(passport);
+var logout = require('express-passport-logout');
 var formidable = require('express-formidable');
 
 var routes = require('./routes/routes');
 
+require('./config/passport')(passport);
 
 var app = express();
 
 app.use(formidable.parse({ keepExtensions:true, uploadDir:"./public/uploads" }));
 //
+app.get('/logout', logout());
 app.use(cookieParser());
 app.use(session({
   secret:'secret',

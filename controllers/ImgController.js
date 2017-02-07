@@ -109,7 +109,7 @@ module.exports = {
           hoy=dd+'/'+mm+'/'+yy;
        console.log(req.body.observaciones);
       
-          res.render('users/savedImg',{
+          res.render('users/saveImgCrp',{
             isAuthenticated : req.isAuthenticated(),
             user : req.user,
             paciente: req.body.selectpicker1,
@@ -137,7 +137,31 @@ module.exports = {
     var enfoque= req.body.enfoque;
     var observacion = req.body.observaciones;
     var responsabledr=req.user.nombre;
-    console.log(tecnica);
+    var base64new = req.body.base5;
+    
+    //console.log(base64new);
+    console.log('AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
+    //console.log(base64new);
+    if(base64new!=""){
+      var session = require('.././database/config');
+      var img_original ='public/uploads/upload_'+req.body.img;
+      base64Image=base64new.split(",").pop(); 
+        
+         session
+             .run('MATCH(ptn:Patient {name:{patientParam}}), (dr:Doctor {name:{doctorParam}}), (vw:View {type:{typevwParam}}), (ar:Area {type:{typearParam}}), (pr:Process {type:{typeprParam}}), (th:Technique {type:{typethParam}})  MERGE(dr)-[rsp:responsable]->(img:Image {base64:{base64Param}, focus:{enfoqueParam}, date:{dateParam}})-[blg:belongs]->(ptn)  MERGE (obs:Observations {drresponsable:{drresponsableParam}, date:{dateParam}, observation:{observationParam}})-[blobs:belongs_obs]->(img) MERGE (img)-[blvw:belongs_vw]->(vw)  MERGE (img)-[blar:belongs_ar]->(ar) MERGE (img)-[blpr:belongs_pr]->(pr) MERGE (img)-[blth:belongs_th]->(th)', {patientParam:paciente, base64Param:base64Image, doctorParam:doctor,dateParam:date, typevwParam:vista, typearParam:area,typeprParam:procedimiento,typethParam:tecnica,  enfoqueParam:enfoque, drresponsableParam:responsabledr, observationParam:observacion})
+             .then(function(result1){
+                fs.unlink(img_original, function(err){  
+                 res.redirect('/users/menu');
+                 session.close();
+               });
+              })
+             .catch(function(err){
+                console.log("Error 2");
+                console.log(err);
+                });  
+    }else{ 
+      console.log("NO SE CORTO LA IMAGEN");
+      
     var session = require('.././database/config');
     var img_original ='public/uploads/upload_'+req.body.img;
     //console.log(img_original);
@@ -150,13 +174,13 @@ module.exports = {
          //.run('CREATE(imgs:Images {base64:{base64Param}, focus:{enfoqueParam}, date:{dateParam}}) MERGE (obs:Observations {date:{dateParam}})-[blvw:belongs_vw]->(img)',{base64Param:base64Image, enfoqueParam:enfoque, dateParam:date})
                           //  .run('CREATE(img:Image {base64:{base64Param}, focus:{enfoqueParam}, date:{dateParam}}) ',{base64Param:base64Image, enfoqueParam:enfoque, dateParam:date})
          // .then(function(result){
-             session
+           session
              //.run('MATCH(ptn:Patient {name:{patientParam}}), (img:Image {base64:{base64Param}, date:{dateParam}}), (dr:Doctor {name:{doctorParam}}) MERGE(dr)-[rsp:responsable]->(img)-[blg:belongs]->(ptn)', {patientParam:paciente, base64Param:base64Image, doctorParam:doctor,dateParam:date })
             // .run('MATCH(ptn:Patient {name:{patientParam}}), (img:Image {base64:{base64Param}, date:{dateParam}}), (dr:Doctor {name:{doctorParam}}), (vw:View {type:{typevwParam}}), (ar:Area {type:{typearParam}}), (th:Technique {type:{typethParam}}), (pr:Process {type:{typeprParam}}) MERGE(dr)-[rsp:responsable]->(img)-[blg:belongs]->(ptn) MERGE (img)-[blvw:belongs_vw]->(vw) MERGE (img)-[blar:belongs_ar]->(ar) MERGE (img)-[blth:belongs_th]->(th) MERGE (img)-[blpr:belongs_pr]->(pr)', {patientParam:paciente, base64Param:base64Image, doctorParam:doctor,dateParam:date, typevwParam:vista, typearParam:area, typethParam:tecnica, typeprParam:procedimiento })
            //   .run('MATCH(ptn:Patient {name:{patientParam}}), (img:Image {base64:{base64Param}, date:{dateParam}}), (dr:Doctor {name:{doctorParam}}), (vw:View {type:{typevwParam}}), (ar:Area {type:{typearParam}}), (pr:Process {type:{typeprParam}}), (th:Technique {type:{typethParam}})  MERGE(dr)-[rsp:responsable]->(img)-[blg:belongs]->(ptn) MERGE (img)-[blvw:belongs_vw]->(vw)  MERGE (img)-[blar:belongs_ar]->(ar) MERGE (img)-[blpr:belongs_pr]->(pr) MERGE (img)-[blth:belongs_th]->(th)', {patientParam:paciente, base64Param:base64Image, doctorParam:doctor,dateParam:date, typevwParam:vista, typearParam:area,typeprParam:procedimiento,typethParam:tecnica})
               .run('MATCH(ptn:Patient {name:{patientParam}}), (dr:Doctor {name:{doctorParam}}), (vw:View {type:{typevwParam}}), (ar:Area {type:{typearParam}}), (pr:Process {type:{typeprParam}}), (th:Technique {type:{typethParam}})  MERGE(dr)-[rsp:responsable]->(img:Image {base64:{base64Param}, focus:{enfoqueParam}, date:{dateParam}})-[blg:belongs]->(ptn)  MERGE (obs:Observations {drresponsable:{drresponsableParam}, date:{dateParam}, observation:{observationParam}})-[blobs:belongs_obs]->(img) MERGE (img)-[blvw:belongs_vw]->(vw)  MERGE (img)-[blar:belongs_ar]->(ar) MERGE (img)-[blpr:belongs_pr]->(pr) MERGE (img)-[blth:belongs_th]->(th)', {patientParam:paciente, base64Param:base64Image, doctorParam:doctor,dateParam:date, typevwParam:vista, typearParam:area,typeprParam:procedimiento,typethParam:tecnica,  enfoqueParam:enfoque, drresponsableParam:responsabledr, observationParam:observacion})
              .then(function(result1){
-                fs.unlink(img_original, function(err){
+                fs.unlink(img_original, function(err){  
                  res.redirect('/users/menu');
                  session.close();
                });
@@ -164,7 +188,7 @@ module.exports = {
              .catch(function(err){
                 console.log("Error 2");
                 console.log(err);
-                });
+                });       
              
                
                
@@ -177,8 +201,8 @@ module.exports = {
        // fs.writeFile('image_decoded.jpg', decodedImage, function(err) {});
        // res.render('users/savedImg');
        
-});  
-
+       });  
+ }
 
          //  console.log(req.body.archivo.path);
          //  console.log(req.body.archivo.type);
@@ -818,7 +842,13 @@ module.exports = {
            });
       
 
-   }
+   },
+   getEntryImgDb:  function(req, res, next){
+      res.render('users/saveImgCrp',{
+           isAuthenticated : req.isAuthenticated(),
+           user : req.user
+    });
+  }
 
 
 }

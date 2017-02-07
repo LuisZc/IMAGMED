@@ -144,3 +144,35 @@ h5.panel-title {
 h6.panel-title {
     font-size: 10px;
 } 
+
+
+.wrapper {
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+  width: 844px;
+}
+
+canvas {
+  margin: 10px;
+  padding: 0;
+  border: 1px solid #333;
+  display: inline-block;
+}
+
+.table {
+        display: table;
+        border-collapse: separate;
+        border-spacing: 10px 50px;
+    }
+    .tableRow {
+        display: table-row;
+    }
+    .tableCell {
+        display: table-cell;
+        vertical-align: top;
+    }
+    .box {
+        border: 10px solid rgba(238, 238, 238, 0.6);
+        background-color: rgba(238, 238, 238, 0.2);
+    }

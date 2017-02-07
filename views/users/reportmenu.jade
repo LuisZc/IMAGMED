@@ -50,20 +50,7 @@ block content
         form(method="GET", enctype="multipart/form-data", action="rspOne")
          input(type="submit" value="Generar" class='btn btn-primary') 
 
-     div(class='panel-heading')
-       h2.panel-title 
-         a(data-toggle='collapse', href='#collapse4')Lista de Pacientes por Doctor
-      #collapse4.panel-collapse.collapse 
-      form(method="POST", enctype="multipart/form-data", action="rspPtntoDr")
-        div(class='form-group')
-         
-         label(for="selectpickerDoctor") Doctores
-         select(class="selectpicker show-tick" data-width="auto" name="selectpickerDoctor" title='Escoger Doctor')
-          -each item in namesdr
-
-           option(data-icon='glyphicon-user') #{item.namedoctor}
-        div(class='form-group')    
-         input(type="submit" value="Generar" class='btn btn-primary') 
+    
 
      div(class='panel-heading')
        h2.panel-title 

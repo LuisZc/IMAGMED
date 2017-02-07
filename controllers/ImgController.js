@@ -641,15 +641,184 @@ module.exports = {
    
    },
 
-   getProcessImg:function(req,res,next){
+   postProcessImg:function(req,res,next){
     // res.redirect('/users/processimg');
-     return res.render('users/processimg',{
+    var imgprs= req.body.img;
+    console.log(imgprs);
+     res.render('users/processimg',{
            isAuthenticated : req.isAuthenticated(),
-           user : req.user
+           user : req.user,
+           baseimg:imgprs
     });
 
-   }
+   },
+   getPreprocessImg: function(req,res,next){
+    var session = require('.././database/config');
+    session
+    .run('MATCH(ptn:Patient) RETURN ptn.name')
+    .then(function(result){
+      var namePtnArr = [];
+      result.records.forEach(function(record){
+         namePtnArr.push({
+            name: record._fields[0]
+          
+         });
+      });
 
+      
+            session
+            .run('MATCH(ar:Area) RETURN ar.type')
+           .then(function(result){
+                 var typeArArr = [];
+                 result.records.forEach(function(record){
+                 typeArArr.push({
+                 typear: record._fields[0]
+          
+                 });
+                });
+                 session
+                  .run('MATCH(th:Technique) RETURN th.type')
+                  .then(function(result){
+                   var typeThArr = [];
+                   result.records.forEach(function(record){
+                   typeThArr.push({
+                   typeth: record._fields[0]
+          
+                   });
+                  });
+                     session
+                    .run('MATCH(pr:Process) RETURN pr.type')
+                    .then(function(result){
+                         var typePrArr = [];
+                         result.records.forEach(function(record){
+                         typePrArr.push({
+                         typepr: record._fields[0]
+          
+                         });
+                        });
+
+                        res.render('users/preprocessimg',{
+                       isAuthenticated : req.isAuthenticated(),
+                       user : req.user,
+                       names: namePtnArr,
+                       typesAr: typeArArr,
+                       typesTh: typeThArr,
+                       typesPr: typePrArr
+                       });
+                        session.close();
+                    })
+                    .catch(function(err){
+                     console.log(err);
+                     });
+                   
+      
+                  session.close();
+
+                 })
+                 .catch(function(err){
+                  console.log(err);
+                  });
+            session.close();
+            })
+            .catch(function(err){
+            console.log(err);
+             });
+            session.close();
+          
+    })
+    .catch(function(err){
+      console.log(err);
+    });
+
+   },
+   postPreprocessImg2: function(req, res, next){
+        var paciente = req.body.selectpickerPaciente;
+    //console.log(area);
+    var session = require('.././database/config');
+    session
+ //    .run('MATCH(dr:Doctor)-[rsp:responsable]-> (img:Image)-[blg:belongs]-> (ptn:Patient)WHERE ptn.name={pacienteParam} RETURN DISTINCT img, ptn, dr', {pacienteParam: paciente})
+    .run('MATCH(dr:Doctor)-[rsp:responsable]-> (img:Image)-[blg:belongs]-> (ptn:Patient), (img)<-[blobs:belongs_obs]-(obs:Observations), (img)-[blvw:belongs_vw]->(vw:View), (img)-[blar:belongs_ar]->(ar:Area), (img)-[blpr:belongs_pr]->(pr:Process), (img)-[blth:belongs_th]->(th:Technique) WHERE ptn.name={pacienteParam} RETURN DISTINCT img, ptn, dr, vw,ar, pr,th',{pacienteParam: paciente})
+    .then(function(result){
+      var imgArr = [];
+      
+      result.records.forEach(function(record){
+         imgArr.push({
+          id: record._fields[0].identity.low,
+          img: record._fields[0].properties.base64,
+          enfoque: record._fields[0].properties.focus,
+          dateimg: record._fields[0].properties.date,
+          name: record._fields[1].properties.name,
+          genero: record._fields[1].properties.gender,
+          namedoctor: record._fields[2].properties.name,
+          vista: record._fields[3].properties.type,
+          area: record._fields[4].properties.type,
+          proceso: record._fields[5].properties.type,
+          tecnica: record._fields[6].properties.type
+         
+         });
+        });
+         session
+        // .run('MATCH(obs:Observations)-[blobs:belongs_obs]-> (img:Image)-[blg:belongs]-> (ptn:Patient) WHERE ptn.name={pacienteParam} RETURN DISTINCT obs, img',{pacienteParam: paciente})
+         .run('MATCH(img:Image)-[blg:belongs]-> (ptn:Patient), (img)<-[blobs:belongs_obs]-(obs:Observations) WHERE ptn.name={pacienteParam} RETURN DISTINCT img, obs',{pacienteParam: paciente})
+         .then(function(result){
+            var obsArr = [];
+      
+           result.records.forEach(function(record){
+           obsArr.push({
+           id: record._fields[0].identity.low,
+           responsable: record._fields[1].properties.drresponsable,
+           dateobs: record._fields[1].properties.date,
+           observacion: record._fields[1].properties.observation
+           
+          });
+          });
+            
+           res.render('users/preprocessimg2',{
+           isAuthenticated : req.isAuthenticated(),
+           user : req.user,
+           imgPaciente: paciente, 
+           images: imgArr,
+           obsv: obsArr
+           });
+           console.log(images);
+           session.close();
+         })
+         .catch(function(err){
+         console.log(err);
+         });
+        session.close();
+    })
+    .catch(function(err){
+      console.log(err);
+    });
+
+   },
+   postPreprocessImg: function(req, res, next){
+      var baseimg = req.body.img;
+       var hoy= new Date();
+          var dd= hoy.getDate();
+          var mm= hoy.getMonth()+1;
+          var yy= hoy.getFullYear();
+          hoy=dd+'/'+mm+'/'+yy;
+       console.log(req.body.observaciones);
+      
+          res.render('users/',{
+            isAuthenticated : req.isAuthenticated(),
+            user : req.user,
+            paciente: req.body.selectpicker1,
+            tipovista: req.body.tipovista,
+            area: req.body.area,
+            tecnica: req.body.tecnica,
+            procedimiento: req.body.procedimiento,
+            enfoque: req.body.enfoque,
+            observaciones: req.body.observaciones,
+            baseimg: baseimg,
+            fecha: hoy
+            
+           });
+      
+
+   }
 
 
 }

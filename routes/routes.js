@@ -48,7 +48,10 @@ router.post('/users/imgobs',AuthMiddleware.isLogged, controllers.ImgController.p
 router.post('/users/svimgobs',AuthMiddleware.isLogged, controllers.ImgController.postSaveImgObs);
 
 
-router.get('/users/primg',AuthMiddleware.isLogged, controllers.ImgController.getProcessImg);
+router.post('/users/primg',AuthMiddleware.isLogged, controllers.ImgController.postProcessImg);
+router.get('/users/pprimg',AuthMiddleware.isLogged, controllers.ImgController.getPreprocessImg);
+router.post('/users/pprimg2',AuthMiddleware.isLogged, controllers.ImgController.postPreprocessImg2);
+router.post('/users/pprimg',AuthMiddleware.isLogged, controllers.ImgController.postPreprocessImg);
 //Rutas Admin
 router.post('/usersu/nwar', AuthMiddleware.isLogged ,controllers.UsersuController.postNewArea);
 router.get('/usersu/nwar', AuthMiddleware.isLogged ,controllers.UsersuController.getNewArea);
@@ -60,6 +63,15 @@ router.post('/usersu/nwpr', AuthMiddleware.isLogged ,controllers.UsersuControlle
 router.get('/usersu/nwpr', AuthMiddleware.isLogged ,controllers.UsersuController.getNewProcess);
 router.post('/usersu/nwspm', AuthMiddleware.isLogged ,controllers.UsersuController.postNewSpecialty);
 router.get('/usersu/nwspm', AuthMiddleware.isLogged ,controllers.UsersuController.getNewSpecialty);
+// Rutas Reportes
+//Menu de Reportes
+router.get('/rprtsmn', AuthMiddleware.isLogged ,controllers.reportsController.getMenuReport);
+//Reportes
+router.get('/rspOne', controllers.reportsController.getReportOne);
+router.post('/rspPaciente',  controllers.reportsController.postReportPtn);
+router.post('/rspImgCrt', controllers.reportsController.postReportImgCrts);
+router.post('/rspPtntoDr', controllers.reportsController.postReportLstPtnDr);
+router.get('/rsptoDr', controllers.reportsController.getReportLstDr);
 
 /* GET home page. */
 /* router.get('/', function(req, res, next) {

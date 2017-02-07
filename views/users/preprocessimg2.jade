@@ -21,7 +21,7 @@ block content
          label(for='imgPaciente')='Paciente:' +' '+ imgPaciente
         div(class='form-group has-success')     
           -each item in images
-           form(method="POST", id="frm1" enctype="multipart/form-data", action="http://localhost:3000/users/imgobs")
+           form(method="POST", id="frm1" enctype="multipart/form-data", action="http://localhost:3000/users/primg")
             div(class='form-group has-success' style='float:left;')
              div(class='form-group')
              label(for='dateImg')= ' Fecha de la Imagen:' + item.dateimg
@@ -68,7 +68,7 @@ block content
                p=" Observacion :"+itmobs.observacion
                br
              div(class='form-group')    
-              input(type="submit" value="AÑADIR OBSERVACIÓN" class='btn btn-primary') 
+              input(type="submit" value="APLICAR FILTRO" class='btn btn-primary') 
              
     div(class='col-xs-6 col-md-4')          
   .container

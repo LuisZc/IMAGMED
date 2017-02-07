@@ -1,49 +1,10 @@
-extends ../templates/default
-
-block content
- br
- br
- br
- br
- .panel.panel-default
-      .panel-heading
-        h2.panel-title SISTEMA DE GESTIÓN
-           small   Filtro de Imagenes
-
-    h1 Filtros a escoger
-    .col-lg-6
-      canvas#canvas
-      img#imagen64(src="data:image/jpg;base64,"+'#{baseimg}' width="0" height="0" )
-    .col-lg-6
-      nav.filters
-        
-        button#brightnessbtn.btn.btn-primary Brightness
-        button#sepiabtn.btn.btn-primary Sepia
-        button#contrastbtn.btn.btn-primary Contrast
-      nav.filters
-        button#vintagebtn.btn.btn-primary Vintage
-        button#lomobtn.btn.btn-primary Lomo
-        button#claritybtn.btn.btn-primary Clarity
-        button#sincitybtn.btn.btn-primary Sin City
-      nav.filters
-        button#crossprocessbtn.btn.btn-primary Cross Process
-        button#hazydaysbtn.btn.btn-primary Hazy
-        button#pinholebtn.btn.btn-primary Pin Hole 
-      nav.filters
-        button#savebtn.btn.btn-success Save Image
-        button#resetbtn.btn.btn-success Reset Photo
-
- script.
-      $(function() {
+ (function() {
       var canvas = document.getElementById('canvas');
-      var imgs = document.getElementById('imagen64').src;
-      console.log("IMPRIME CONSOLE LOG IMPRIME CONSOLE LOG");
-      console.log(imgs);
       var ctx = canvas.getContext('2d');
       /* Enable Cross Origin Image Editing */
       var img = new Image();
       img.crossOrigin = '';
-      img.src = imgs;
+      img.src = 'data:image/png;base64,';
       img.onload = function() {
       canvas.width = img.width;
       canvas.height = img.height;

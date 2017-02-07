@@ -29,30 +29,15 @@ block content
            p
             |Ingresar Imagenes: 
             a(href='menu') Nueva Imagen
-        h3.panel-title Reportes
+        h3.panel-title Reportes 
         div(class='form-group has-success')
-         font(size='3')
-           p
-            |Reporte Imagenes a Cargo por Doctor : 
-            a(href='/rspOne' target='_blank') Generar
-        div(class='form-group has-success')
-         font(size='3')
-           p
-            |Reporte Imagenes por Paciente : 
-            a(href='/rspPaciente' target='_blank') Generar
-        div(class='form-group has-success')
-         font(size='3')
-           p
-            |Reporte Imagenes por Area : 
-            a(href='/rspImgArea' target='_blank') Generar
         font(size='3')
-           p
-            |Reporte Imagenes de Pacientes por Doctor : 
-            a(href='/rspPtntoDr' target='_blank') Generar
-        font(size='3')
-           p
-            |Reporte Lista de Doctores: 
-            a(href='/rsptoDr' target='_blank') Generar
+          p
+            |Reportes  : 
+            a(href='/rprtsmn' target='_blank') Menu de Reportes
+         
+        
+                  
              
     div(class='col-md-6')
      img(src='/images/imagmed.png' width="700" height="400")       
@@ -77,7 +62,14 @@ block content
           font(size='3')
             p
              |Imagenes: 
-             a(href='viewtechnique') Por Técnica	 
+             a(href='viewtechnique') Por Técnica	
+          h3.panel-title Filtrado de Imagen
+        div(class='panel-body')
+         div(class='form-group has-success')
+          font(size='3')
+            p
+             |Filtros: 
+             a(href='pprimg') Filtrado de Imagen
  .container
 
     hr        

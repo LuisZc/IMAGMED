@@ -160,7 +160,7 @@ canvas {
   display: inline-block;
 }
 
-.table {
+.table#proceso {
         display: table;
         border-collapse: separate;
         border-spacing: 10px 50px;

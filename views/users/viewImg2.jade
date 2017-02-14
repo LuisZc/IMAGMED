@@ -10,96 +10,108 @@ block content
         small Imagenes realizadas al paciente
   br
   div(class='row')
-   
-    div(class='col-xs-6 col-md-4')
-    div(class='col-xs-6 col-md-5')
-     div(class='panel panel-default')
-      div(class='panel-heading')
-        h3.panel-title Registro de Imagenes del Paciente
-       div(class='panel-body')
-        div(class='form-group')
-         label(for='imgPaciente')='Paciente:' +' '+ imgPaciente
-        div(class='form-group has-success')     
-          -each item in images
-           form(method="POST", id="frm1" enctype="multipart/form-data", action="http://localhost:3000/users/imgobs")
-            div(class='form-group has-success' style='float:left;')
-             div(class='form-group')
-             label(for='dateImg')= ' Fecha de la Imagen:' + item.dateimg
-             input(type="hidden" name="img" id="img"  value="#{item.img}")
-             input(type="hidden" name="nameDoctor" id="nameDoctor"  value="#{item.namedoctor}" readonly="readonly")
-             input(type="hidden" name="namePaciente" id="namePaciente"  value="#{imgPaciente}")
-             input(type="hidden" name="fechaImg" id="fechaImg"  value="#{item.dateimg}")
-             input(type="hidden" name="vista" id="vista"  value="#{item.vista}")
-             input(type="hidden" name="area" id="area"  value="#{item.area}")
-             input(type="hidden" name="tecnica" id="tecnica"  value="#{item.tecnica}")
-             input(type="hidden" name="proceso" id="proceso"  value="#{item.proceso}")
-             input(type="hidden" name="enfoque" id="enfoque"  value="#{item.enfoque}")
+  -each item in images
+    form(method="POST", id="frm1" enctype="multipart/form-data", action="http://localhost:3000/users/imgobs") 
+      div(class='col-xs-1')
+      div(class='col-xs-5')
+       div(class='panel panel-primary')
+        div(class='panel-heading')
+          h3.panel-title Registro de Imagenes del Paciente
+         div(class='panel-body')
+          div(class='form-group')
+           label(for='imgPaciente')='Paciente:' +' '+ imgPaciente
+          div(class='form-group has-success')     
+            
+              div(class='form-group has-success' style='float:left;')
+               div(class='form-group')
+               label(for='dateImg')= ' Fecha de la Imagen:' + item.dateimg
+               input(type="hidden" name="img" id="img"  value="#{item.img}")
+               input(type="hidden" name="nameDoctor" id="nameDoctor"  value="#{item.namedoctor}" readonly="readonly")
+               input(type="hidden" name="namePaciente" id="namePaciente"  value="#{imgPaciente}")
+               input(type="hidden" name="fechaImg" id="fechaImg"  value="#{item.dateimg}")
+               input(type="hidden" name="vista" id="vista"  value="#{item.vista}")
+               input(type="hidden" name="area" id="area"  value="#{item.area}")
+               input(type="hidden" name="tecnica" id="tecnica"  value="#{item.tecnica}")
+               input(type="hidden" name="proceso" id="proceso"  value="#{item.proceso}")
+               input(type="hidden" name="enfoque" id="enfoque"  value="#{item.enfoque}")
 
-             br
-             br
-             div(class='form-group')
-             img(src="data:image/jpg;base64,"+item.img alt="Chicago" width="auto" height="auto")
-             br
-             br
-            .enlacesfavoritos 
-             br
-             br
-             div(class='form-group')
-             label(for='namedoctor')= ' Responsable:' + item.namedoctor
-             div(class='form-group') 
-             p=" Vista :"+item.vista
-             div(class='form-group')
-             p=" Área :"+item.area
-             div(class='form-group')
-             p=" Técnica :"+item.tecnica
-             div(class='form-group')
-             p=" Proceso :"+item.proceso
-             div(class='form-group')
-             p=" Enfoque :"+item.enfoque
-             div(class='form-group')
-             label(for='Obsercaciones')= 'Observaciones :'
-             -each itmobs in obsv
-              if itmobs.id.toString() == item.id.toString()
-               div(class='form-group')
-               p=" Médico Encargado :"+itmobs.responsable
-               div(class='form-group')
-               p=" Fecha :"+itmobs.dateobs
-               div(class='form-group')
-               p=" Observacion :"+itmobs.observacion
                br
-             div(class='form-group')    
-              input(type="submit" value="AÑADIR OBSERVACIÓN" class='btn btn-primary') 
+               br
+               div(class='form-group')
+               img(align='center' src="data:image/jpg;base64,"+item.img alt="Chicago" width="400" height="400")
+               br
+               br
+      div(class='col-xs-1')
+      div(class='col-xs-5')       
+              
+               
+       div(class='panel panel-primary')
+        div(class='panel-heading')
+          h3.panel-title Información
+         div(class='panel-body')
+          div(class='form-group')
+           
+           div(class='form-group has-success')     
+            
+              div(class='form-group has-success' style='float:left;')
+               div(class='form-group')        
+               div(class='form-group')
+               label(for='namedoctor')= ' Responsable:' + item.namedoctor
+               div(class='form-group') 
+               p=" Vista :"+item.vista
+               div(class='form-group')
+               p=" Área :"+item.area
+               div(class='form-group')
+               p=" Técnica :"+item.tecnica
+               div(class='form-group')
+               p=" Proceso :"+item.proceso
+               div(class='form-group')
+               p=" Enfoque :"+item.enfoque
+               div(class='form-group')
+               label(for='Obsercaciones')= 'Observaciones :'
+               -each itmobs in obsv
+                if itmobs.id.toString() == item.id.toString()
+                 div(class='form-group')
+                 p=" Médico Encargado :"+itmobs.responsable
+                 div(class='form-group')
+                 p=" Fecha :"+itmobs.dateobs
+                 div(class='form-group')
+                 p=" Observacion :"+itmobs.observacion
+                 br
+                 
+               input(type="submit" value="AÑADIR OBSERVACIÓN" class='btn btn-primary') 
              
-    div(class='col-xs-6 col-md-4')          
-  .container
+       
+  div(class='row')            
+   .container
 
-    hr        
-    .col-md-4
-    
-       p
-           | UNIVERSIDAD CENTRAL DEL ECUADOR
-           br
-           | Todos los derechos reservados
-           br
-           img(src='/images/imagmedpequeño.png' width="160" height="60")
-    .col-md-4
-     .text-center.center-block
-       h2.txt-railway Síguenos
-       br
-       a(href='https://www.facebook.com/bootsnipp')
-         i#social-fb.fa.fa-facebook-square.fa-3x.social 
-       a(href='https://twitter.com/bootsnipp')
-         i#social-tw.fa.fa-twitter-square.fa-3x.social 
-       a(href='https://plus.google.com/+Bootsnipp-page')
-         i#social-gp.fa.fa-google-plus-square.fa-3x.social 
-       a(href='mailto:bootsnipp@gmail.com')
-         i#social-em.fa.fa-envelope-square.fa-3x.social 
-    .col-md-4
+     hr        
+     .col-md-4
+     
+        p
+            | UNIVERSIDAD CENTRAL DEL ECUADOR
+            br
+            | Todos los derechos reservados
+            br
+            img(src='/images/imagmedpequeño.png' width="160" height="60")
+     .col-md-4
+      .text-center.center-block
+        h2.txt-railway Síguenos
+        br
+        a(href='https://www.facebook.com/bootsnipp')
+          i#social-fb.fa.fa-facebook-square.fa-3x.social 
+        a(href='https://twitter.com/bootsnipp')
+          i#social-tw.fa.fa-twitter-square.fa-3x.social 
+        a(href='https://plus.google.com/+Bootsnipp-page')
+          i#social-gp.fa.fa-google-plus-square.fa-3x.social 
+        a(href='mailto:bootsnipp@gmail.com')
+          i#social-em.fa.fa-envelope-square.fa-3x.social 
+     .col-md-4
 
-        h3 Contacto:
-        p Dirección: Av.Universitaria.
-        p Telefono: 3453-529  
-        p Correo: lapadilla@rutatec.com           
+         h3 Contacto:
+         p Dirección: Av.Universitaria.
+         p Telefono: 3453-529  
+         p Correo: lapadilla@rutatec.com           
        
             
 

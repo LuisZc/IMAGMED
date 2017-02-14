@@ -11,7 +11,7 @@ block content
            small   Nuevo Paciente
   div(class='row')
   div(class='col-md-6 col-md-offset-3')
-    div(class='panel panel-default')
+    div(class='panel panel-primary')
      div(class='panel-heading ')
        h3.panel-title Ingresar datos Paciente
       div(class='panel-body')
@@ -50,7 +50,7 @@ block content
           input(type='lugres' name='lugres' id='lugres' placeholder='Lugar de Residencia' class='form-control' style='text-transform:uppercase')
          div(class='form-group has-success')
           label(for='telefono')='Teléfono'
-          input(type='telefono' name='telefono' id='telefono' placeholder='Teléfono' class='form-control' style='text-transform:uppercase')     
+          input(type='tel' name='telefono' id='telefono' placeholder='Teléfono' class='form-control' style='text-transform:uppercase' maxlength='10')     
          button(type='submit' class='btn btn-primary')= 'Registrar' 
  .container
 

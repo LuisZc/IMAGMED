@@ -11,9 +11,9 @@ block content
   br
   div(class='row')
    
-    
-    div(class='col-md-6 col-xs-10')
-     div(class='panel panel-default')
+    div(class='col-xs-1')
+    div(class='col-xs-6')
+     div(class='panel panel-primary')
       div(class='panel-heading')
         h3.panel-title Ingreso de Observación
        div(class='panel-body')
@@ -51,15 +51,30 @@ block content
                div(class='form-group')
                p=" Observacion :"+itmobs.observacion
                br
+    div(class='col-xs-1')
+    div(class='col-xs-4')         
         div(class='form-group has-success') 
         form(method="POST", enctype="multipart/form-data", action="http://localhost:3000/users/svimgobs")
           div(class='form-group')
             label(for='Observación')= ' Fecha :' + fecha
+             br
+             br
+             br
+             br
+             br
+             br
+             br
+             br
+             br
+             br
+             br
+             br
+             br
              input(type="hidden" name="img" id="img"  value="#{img}")
              input(type="hidden" name="nameDoctor" id="nameDoctor"  value="#{namedoctor}" readonly="readonly")
              input(type="hidden" name="namePaciente" id="namePaciente"  value="#{namepaciente}")
              input(type="hidden" name="fechaImg" id="fechaImg"  value="#{dateimg}")
-             textarea(cols="40", rows="10", name="observation", id="observation")
+            textarea(cols="40", rows="10", name="observation", id="observation")
           div(class='form-group')    
               input(type="submit" value="GUARDAR" class='btn btn-primary') 
                

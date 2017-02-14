@@ -11,7 +11,7 @@ block content
            small   Nuevo Doctor
  div(class='row')
   div(class='col-md-6 col-md-offset-3')
-    div(class='panel panel-default')
+    div(class='panel panel-primary')
      div(class='panel-heading')
        h3.panel-title Ingresar datos Doctor
       div(class='panel-body')
@@ -34,12 +34,12 @@ block content
           input(type='nacionalidad' name='cedula' id='cedula' placeholder='cédula' class='form-control' style='text-transform:uppercase')
          div(class='form-group has-success')
           label(for='area') Área
-          select( class="selectpicker" data-style="btn-default" name="area" title='Escoger el Area') 
+          select( class="selectpicker" data-style="btn-default" data-width="100%" name="area" title='Escoger el Area') 
             -each item in typesAr
               option #{item.typear}
          div(class='form-group has-success')
           label(for='especialidad') Especialidad
-          select( class="selectpicker" data-style="btn-default" name="especialidad" title='Escoger la Especialidad') 
+          select( class="selectpicker" data-style="btn-default" data-width="100%" name="especialidad" title='Escoger la Especialidad') 
             -each item in nameSpArr
               option #{item.namesp}
          div(class='form-group has-success')

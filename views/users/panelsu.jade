@@ -19,20 +19,13 @@ block content
      br
   div(class='row')        
     div(class='col-md-3')
-     div(class='panel panel-default')
+     div(class='panel panel-primary')
       div(class='panel-heading')
         h3.panel-title Nuevos Ingresos
        div(class='panel-body')
         div(class='form-group has-success')
- 
-         font(size='3')
-           p
-            |Ingresar Doctor: 
-            a(href='doctors') Nuevo Doctor
-         font(size='3')
-           p
-            |Ingresar Paciente: 
-            a(href='patients') Nuevo Paciente  
+         
+         h2.panel-title Ingreso Parametros  
          font(size='3')
            p
             |Ingresar Especialidad Médica: 
@@ -53,11 +46,20 @@ block content
            p
             |Ingresar Procedimiento 
             a(href='/usersu/nwpr') Nuevo Procedimiento
+         h2.panel-title Ingreso Usuarios   
+         font(size='3')
+           p
+            |Ingresar Doctor: 
+            a(href='doctors') Nuevo Doctor
+         font(size='3')
+           p
+            |Ingresar Paciente: 
+            a(href='patients') Nuevo Paciente     
 
     div(class='col-md-6')
      img(src='/images/imagmed.png' width="700" height="400")       
     div(class='col-md-3') 
-      div(class='panel panel-default')
+      div(class='panel panel-primary')
        div(class='panel-heading')
          h3.panel-title Nueva Busqueda 
         div(class='panel-body')

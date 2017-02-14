@@ -13,7 +13,7 @@ block content
              label(for='doctor') Doctor
              input(type="text", name="doctorname" value= user.nombre class='form-control') 
          div(class='form-group has-success')
-           label(for='fecha') Paciente
+           label(for='fecha') Fecha de Ingreso
              input(type="text", name="fecha" value= fecha class='form-control') 
          div(class='form-group has-success')
            label(for='paciente') Paciente
@@ -36,7 +36,7 @@ block content
          div(class='form-group has-success')
              label(for='observaciones') Observaciones
              textarea#observaciones(cols='40', rows='10', name='observaciones') #{observaciones}
-             input#base5(type="text", name="base5")          
+             input#base5(type="hidden", name="base5")          
              input#imgorg4(type="hidden", name="img" value= img) 
          div(class='form-group')
           input(type="submit" value="Guardar" class="btn btn-primary")       
@@ -48,13 +48,16 @@ block content
               if !img
                 img(src="" alt="SIN IMAGEN" width="0" height="0") 
          div(class='form-group')
-           .table
+           .table#proceso
               .tableRow
                 .tableCell.box
+                  h3.panel-title Imagen Previa
                   canvas#panel(width='380', height='380')
                   p
-                    input#cropBttn(type='button', value='Crop')
+                    input#cropBttn(type='button', class="btn btn-primary", value='Cortar')
               .tableRow
+                .tableCell.box 
+                  h3.panel-title Imagen Recortada
                   img#croppedImage(src='')           
 
   
